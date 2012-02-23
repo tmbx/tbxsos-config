@@ -1,0 +1,14 @@
+<h2><%= GTEH_("views.updates.update.title") %></h2>
+
+<div class="doc"><%= GTEH_("views.updates.update.doc") %></div>
+
+<div class="output" style="font-size: xxx-small">
+<% if @nofile == 1 %>
+<span class="result_msg color_failed"><%= GTEH_("updates.result.no_file_uploaded") %></span>
+<% elsif @success == 1 %>
+<span class="result_msg color_success">><%= GTEH_("misc.message.success") %></span>
+<% else %>
+<span class="result_msg color_failed">><%= GTEH_("misc.message.failed") %></span>
+<% @lines.each do |e| %><%= CGI.escapeHTML(e) %><br><% end %>
+<% end %>
+</div>

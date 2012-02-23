@@ -1,0 +1,11 @@
+<h2><%= @page_title %></h2>
+
+<%= render :partial => 'layouts/menu_pagetop', :locals => {:menu_id => "pagetop_teambox"} %>
+
+<div class="doc"><%= @page_doc %></div>
+
+
+<%= render :partial => 'layouts/standard_form', :locals => {:controller => params[:controller], :action => "set"} %>
+
+<!-- <%= link_to GT_("views.teambox_options.list.link_to.licenses"), {:action => 'list', :controller => 'licenses'}, { :class => "redirector_link" } %> -->
+

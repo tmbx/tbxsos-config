@@ -1,0 +1,102 @@
+<h2><%= @page_title %></h2>
+
+<%= render :partial => 'layouts/menu_pagetop', :locals => {:menu_id => "pagetop_teambox"} %>
+
+<%
+  if not @no_license.nil?
+%>
+<br />
+<div style="color: red;"><%= GTEH_("info.no_license") %></div>
+<%
+  end
+%>
+
+
+<%
+  if @no_license.nil?
+%>
+
+<div class="doc"><%= GTEH_("views.licenses.list.doc") %></div>
+<%
+    if @total_seats_used >= @license.limit && @license.limit >= 0
+%>
+<div class="error_revert"><%= GTEH_("views.licenses.list.reached_lim") %></div>
+<%
+    end
+%>
+
+<%= GTEH_("views.licenses.list.lim_seats") %>: <%= @license.limit.to_s == "-1" ? GTEH_("views.info.list.unlimited") : @license.limit.to_s %><br />
+<!-- <%= GTEH_("views.licenses.list.max_seats") %>: <%= @license.max %><br /> -->
+<%= GTEH_("views.licenses.list.total_used_seats") %>: <%= @total_seats_used %><br />
+
+
+<%
+    if @is_reseller
+      if @orgs.length > 1
+%>
+<br />
+<table style="width: 80%">
+<tr>
+  <td class="col_title"><%= GTEH_("views.licenses.list.orgs.organizations") %></td>
+  <td class="col_title"><%= GTEH_("views.licenses.list.orgs.used_seats") %></td>
+  <td class="col_title"><%= GTEH_("views.licenses.list.orgs.allocated_seats") %></td>
+  <td class="col_title">&nbsp;</td>
+</tr>
+<%
+        @orgs.each do |org, seats_used, seats_allocated|
+%>
+<tr>
+  <td class="text"><%= org.name %></td>
+  <td class="number"><%= seats_used %></td>
+  <td class="number"><%= seats_allocated %></td>
+  <td class="action_links"><%= link_to GTEH_("views.licenses.list.orgs.link_edit_seats"), {:action => 'list', :org_id => org.org_id, :anchor => "seats"} %></td>
+</tr>
+<%
+        end
+%>
+</table>
+<%
+      end
+    end
+%>
+
+<br />
+<a name="seats" />
+<h4><%= GTEH_("views.licenses.list.seats_list") %> <% if @is_reseller %>(<%= @org.name %>)<% end %></h4>
+<%
+    if ! @list_seats.nil? && @list_seats.length > 0
+%>
+
+<table style="width: 80%">
+<%
+      @list_seats.each do |s|
+%>
+  <tr>
+    <td><%= s.user_name %></td>
+    <td style="width: 4em">
+      <%= link_to GT_("views.seats.list.link_to.delete"), {:action => 'free_login_seat', :org_id => s.org_id, :username => s.user_name}, {:confirm => GT_("misc.forms.are_you_sure"), :class => "action_links"} %></td>
+  </tr>
+<%
+      end
+%>
+</table>
+
+<%
+    else
+%>
+
+<%    if @is_reseller %>
+<%= GTEH_("views.licenses.list.no_seats_reseller") %>
+<%    else %>
+<%= GTEH_("views.licenses.list.no_seats") %>
+<%    end %>
+
+<%
+    end
+  end
+%>
+
+
+
+<!-- <%= link_to GT_("views.licenses.list.link_to.back"), {:action => 'list', :controller => 'teambox_options'}, {:class => "back_link"}  %> -->
+

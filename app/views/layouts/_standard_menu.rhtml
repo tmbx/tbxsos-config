@@ -1,0 +1,36 @@
+<%
+  if @menus.menus_items[menu_id].nil?
+%>
+<%= render :partial => 'layouts/in_line_error', :locals => {:message => GTEH_("views.layouts._standard_menu.undefined_yet")} %>
+<%
+  else
+%>
+
+<%
+    @menus.menus_order[menu_id].each do |key|
+      menu = @menus.menus_items[menu_id][key]
+      if ! menu["disabled"].nil? && menu["disabled"]
+%>
+<div class="link_disabled"><%= GTEH_(menu["label"]) %></div>
+<%
+      else
+%>
+<div class="menu_item">
+<%
+        if ! menu["selected"].nil? && menu["selected"]
+          if menu["linktagparams"]["class"].nil?
+            menu["linktagparams"]["class"] = ""
+          end
+          tclass = menu["linktagparams"]["class"].split(" ")
+          tclass.push("link_selected")
+          menu["linktagparams"]["class"] = tclass.join(" ")
+        end
+%>
+<%= link_to GT_(menu["label"]), menu["linkparams"], menu["linktagparams"] %>
+</div>
+<%
+      end
+    end
+  end
+%>
+

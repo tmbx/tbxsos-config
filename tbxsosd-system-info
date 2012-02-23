@@ -1,0 +1,46 @@
+#!/bin/sh
+# (C) 2007-2012 Opersys inc. All rights reserved. 
+
+# Small script to dump all the packages and versions used in the TBXSOS.
+
+versions_file=`mktemp`
+packages_file=`mktemp`
+
+# CPU information
+echo "** /proc/cpuinfo"
+echo
+cat /proc/cpuinfo
+echo
+
+# Memory information.
+echo "** /proc/meminfo"
+echo
+cat /proc/meminfo
+echo
+
+echo "** web.conf"
+echo
+[ -e /etc/teambox/web.conf ] && \
+    cat /etc/teambox/web.conf | \
+    grep -vE ".*pass(word)*.* "
+echo
+
+# List of package and package versions.
+echo "** Installed packages"
+echo
+cat /var/lib/dpkg/status \
+    | egrep "^Version" \
+    | cut -d " " -f 2 \
+    | sort \
+    | nl -n 'ln' > $versions_file
+cat /var/lib/dpkg/status \
+    | egrep "^Package" \
+    | cut -d " " -f 2 \
+    | sort \
+    | nl -n 'ln' > $packages_file
+
+join $packages_file $versions_file 
+
+[ -e $versions_file ] && rm $versions_file
+[ -e $packages_file ] && rm $packages_file
+

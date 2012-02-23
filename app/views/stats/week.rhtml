@@ -1,0 +1,45 @@
+<h2><%= @page_title %></h2>
+
+<%
+  @update_str = GTEH_("views.stats.no_stats_yet")
+  if not @nostatsyet
+    @update_str = @time_updated.strftime("%Y-%m-%d %H:%M:%S")
+  end
+%>
+
+<div class="doc"><%= @page_doc %> <br /><br /><%= GTEH_("views.stats.last_updated") % ( @update_str ) %></div>
+
+<div class="stats">
+<div class="menu">
+<%= link_to GTEH_("views.stats.current_week"), { :action => "current_week" } %>
+<%= link_to GTEH_("views.stats.last_week"), { :action => "last_week" } %>
+</div>
+
+
+<%
+  if not @nostatsyet
+%>
+
+
+<div class="graph_desc"><%= GTEH_("views.stats.graph.nbpergroup") %></div>
+<img src="/tbxsos-stats/stats-weekly-pkg-<%= @date %>.png" />
+
+<div class="graph_desc"><%= GTEH_("views.stats.graph.avgdelay") %></div>
+<img src="/tbxsos-stats/stats-weekly-pkg-delay-<%= @date %>.png" />
+
+<%= @table %>
+
+<!--
+<div class="menu">
+<%= link_to GTEH_("views.stats.current_week"), { :action => "current_week" } %>
+<%= link_to GTEH_("views.stats.last_week"), { :action => "last_week" } %>
+<div>
+-->
+
+
+<%
+  end
+%>
+
+</div>
+

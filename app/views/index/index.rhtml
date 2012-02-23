@@ -1,0 +1,5 @@
+<h2><%= @page_title %></h2>
+
+<% form_tag(:action => 'login', :controller => 'login') do %>
+  <%= GTEH_("views.index.index.password") %><%= password_field 'login', 'password' %> <%= submit_tag GT_("views.index.index.action_login") %>
+<% end %>

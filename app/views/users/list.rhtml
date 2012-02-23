@@ -1,0 +1,52 @@
+<h2><%= @page_title %></h2>
+
+<%= render :partial => 'doc' %>
+
+<%= render :partial => 'org' %>
+
+<h5>
+<%= GTEH_("forms.organization.users_are") %>
+<% @anchors.each do |f| %>
+<a href="#<%= f[0].to_s %>"><%= f %></a>
+<% end %>
+</h5>
+
+<div class="other_action_link">
+<%= link_to GT_("views.users.list.link_to.add"), :action => 'new', :org_id => params[:org_id]  %>
+</div>
+
+<table class="list">
+  <tr>
+    <th align="left"><%= GTEH_("views.users.list.full_name") %></th>
+    <th align="left"><%= GTEH_("views.users.list.pri_email") %></th>
+  </tr>
+  <% last_anchor = nil 
+     current_anchor = nil %>
+  <% for p in @profiles %>
+  <tr class="list_line">
+    <% if p.user %>
+
+    <td width="*"> <%= names = [ p.user.first_name, p.user.last_name ]; names.join(" ") %></td>
+    <td>
+    <% current_anchor = "#{p.user.first_name[0].to_s}" %>
+    <% if current_anchor != last_anchor %>
+    <a name="<%= current_anchor %>" />
+    <% last_anchor = current_anchor %>
+    <% end %>
+    <%=
+        begin
+            if ! p.user.primary_email.email_address.nil?
+                p.user.primary_email.email_address
+            end
+        rescue
+            ""
+        end
+    %>
+    </td>
+    <td width="60"><div class="list_edit"><%= link_to GT_("views.users.list.link_to.edit"), {:action => 'edit', :id => p} %></div></td>
+    <td width="60"><div class="list_delete"><%= link_to GT_("views.users.list.link_to.delete"), {:action => 'delete', :id => p}, :confirm => "Are you sure?" %></div></td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+

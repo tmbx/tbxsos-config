@@ -1,0 +1,3 @@
+<div class="doc"><%= GTEH_("views.activation.step0.main_advanced.doc") %></div>
+<%= link_to GT_("views.activation.step0.advanced"), url_for(:action => "step0_advanced"), { :class => 'redirector_link' } %>
+

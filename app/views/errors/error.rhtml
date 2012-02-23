@@ -1,0 +1,93 @@
+<%
+  # initialize if nil (this is already done in applications controller... 
+  # but we can't take any chance since this is our last change for getting infos about the TBXSOS
+  @exception_msg ||= "Unknown exception."
+  @exception_bck ||= "Unknown backtrace."
+  @sysinfo ||= "Unknown system info."
+%>
+
+<h2>Error</h2>
+
+<script type="text/javascript">
+
+function error_GetElementById(objectId)
+{
+    // cross-browser function to get an object's style object given its id
+    if(document.getElementById && document.getElementById(objectId)) {
+        // W3C DOM
+        return document.getElementById(objectId);
+    } else if (document.all && document.all(objectId)) {
+        // MSIE 4 DOM
+        return document.all(objectId);
+    } else if (document.layers && document.layers[objectId]) {
+        // NN 4 DOM.. note: this won't find nested layers
+        return document.layers[objectId];
+    } else {
+        return false;
+    }
+}
+
+
+function toggle_visibility(objectId)
+{
+  if (error_GetElementById(objectId))
+  {
+    if (error_GetElementById(objectId).style.display == 'none')
+    {
+      error_GetElementById(objectId).style.display = "block";
+    }
+    else
+    {
+      error_GetElementById(objectId).style.display = "none";
+    }
+  }
+}
+
+</script>
+
+<div class="doc">
+
+<%= GTEH_("views.errors.error.doc") %>
+
+<%=
+  body = GTEH_("views.errors.error.please_explain\n") \
+           + @exception_msg + "\n\n" \
+           + @exception_bck + "\n\n" \
+           + @sysinfo 
+    mail_to "support@teambox.co", GTEH_("views.errors.error.send_to_support"),
+    :subject => @exception_msg,
+    :body => body
+%>
+</div>
+
+<h3><%= GTEH_("views.errors.error.error_message") %></h3>
+<pre>
+<%= @exception_msg + "\n" %>
+</pre>
+
+<h3><%= GTEH_("views.errors.error.error_trace") %></h3>
+<a href="#error-trace" 
+   onclick="toggle_visibility('error-trace'); return false">
+  <%= GTEH_("views.errors.error.show_error_trace") %>
+</a>
+<div id="error-trace" style="display: none">
+<a name="#error-trace"></a>
+<div class="error">
+<% @exception_bck.each do |m| %> 
+<%= m %><br />
+<% end %>
+</div>
+</div>
+</div>
+
+<h3><%= GTEH_("views.errors.error.system_information") %></h3>
+<a href="#system-info" 
+   onclick="toggle_visibility('system-info'); return false">
+  <%= GTEH_("views.errors.error.show_system_information") %>
+</a>
+<div id="system-info" style="display: none">
+<a name="#system-info"></a>
+<div class="error">
+<%= @sysinfo.gsub("\n", "<br />") %>
+</div>
+</div>

@@ -1,0 +1,16 @@
+<h2><%= @page_title %></h2>
+
+<%= render :partial => 'doc' %>
+
+<%= render :partial => 'org' %>
+
+<%= render :partial => 'layouts/standard_form', :locals => {:controller => "users", :action => "update", :formtitle => GTEH_("views.users.edit.formtitle.edit_user")} %>
+
+
+
+<a name="edit_email_parts" />
+<%= render :partial => 'layouts/standard_form', :locals => {:controller => "users", :action => 'update_emails', :id => @profile, :anchor => "edit_email_parts", :formtitle => GTEH_("views.users.edit.formtitle.sec_emails"), :optgroup => "sec_emails"} %>
+
+
+<%= link_to GT_("views.users.edit.link_to.back_users"), {:action => 'list', :org_id => @profile.org_id}, {:class => "back_link"} %>
+

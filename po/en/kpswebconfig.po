@@ -1,0 +1,1410 @@
+# -*- coding: iso-8859-15 -*-
+
+msgid ""
+msgstr ""
+
+msgid "menu.language.en"
+msgstr "English"
+
+msgid "menu.language.fr"
+msgstr "French"
+
+msgid "error.404.doc"
+msgstr "There is no such file: '%s'"
+
+msgid "error.404.redirect_to"
+msgstr "Return to index"
+
+msgid "misc.internal_error"
+msgstr "An internal error has occured."
+
+msgid "logs.config.save.option_value"
+msgstr "Editable option: '%s' : '%s'"
+
+msgid "logs.config.save.option_value_changed"
+msgstr "Changed option: '%s' : '%s' ==> '%s'"
+
+msgid "menu.label.dashboard"
+msgstr "Dashboard"
+
+msgid "menu.label.logout"
+msgstr "Logout"
+
+msgid "menu.label.basic_setup"
+msgstr "Basic Setup"
+
+msgid "menu.label.teambox_identity"
+msgstr "License management"
+
+msgid "menu.label.organizations"
+msgstr "Organizations"
+
+msgid "menu.label.user_management"
+msgstr "User Management"
+
+msgid "menu.label.ldap_setup"
+msgstr "LDAP Setup"
+
+msgid "menu.label.activation"
+msgstr "Activation"
+
+msgid "menu.label.backup_restore"
+msgstr "Backup / Restore"
+
+msgid "menu.label.updates"
+msgstr "Updates"
+
+msgid "menu.label.tests"
+msgstr "Tests"
+
+msgid "menu.label.logs"
+msgstr "Logs"
+
+msgid "menu.label.about"
+msgstr "About"
+
+msgid "menu.label.manual"
+msgstr "Manual"
+
+msgid "menu.label.legal"
+msgstr "Legal"
+
+msgid "menu.label.ldap_config"
+msgstr "LDAP Config"
+
+msgid "menu.label.divisions"
+msgstr "Divisions"
+
+msgid "menu.label.identity"
+msgstr "Identity"
+
+msgid "menu.label.licensed_seats"
+msgstr "Licensed Seats"
+
+# The "\n" is needed here
+msgid "datetime.change_date.success\n"
+msgstr "Date changed to %04d-%02d-%02d.\n"
+
+msgid "datetime.change_date.failed"
+msgstr "Failed to change date."
+
+# The "\n" is needed here
+msgid "datetime.change_time.success\n"
+msgstr "Time changed to %02d:%02d:%02d.\n"
+
+msgid "datetime.change_time.failed"
+msgstr "Failed to change time."
+
+# The "\n" is needed here
+msgid "datetime.change_timezone.success\n"
+msgstr "Timezone changed to %s.\n"
+
+msgid "datetime.change_timezone.failed"
+msgstr "Failed to change timezone.\n"
+
+msgid "backup.failed"
+msgstr "The backup failed. Check the \"Logs\" page for more informations."
+
+msgid "backup.restore.server_did_not_restart"
+msgstr "The backup was successfully restored, but key components did not restart. Check the \"Logs\" page for more information."
+
+msgid "backup.restore.file_too_old"
+msgstr "The backup file selected is for an older version of the Teambox Sign-On Server; it cannot be used."
+
+msgid "backup.restore.file_too_recent"
+msgstr "The backup file selected is for a newer version of the Teambox Sign-On Server; you must first upgrade your server."
+
+msgid "backup.restore.file_invalid"
+msgstr "The backup file selected is invalid."
+
+msgid "backup.restore.failed"
+msgstr "The Teambox Sign-On Server failed to restore the backup file selected. Check the \"Logs\" page for more information."
+
+# DEP msgid "logs.activation.check.not_activated"
+# DEP msgstr "Not activated. You are being REDIRECTED."
+msgid "logs.activation.check.current_step"
+msgstr "Current step: %s"
+
+msgid "logs.activation.check.is_valid_step"
+msgstr "Is Valid Step: %s."
+
+msgid "logs.activation.check.is_valid_req"
+msgstr "Is Valid Req: %s."
+
+msgid "logs.activation.check.is_cancel_req"
+msgstr "Is Cancel Req: %s."
+
+msgid "logs.activation.check.is_valid_download"
+msgstr "Is Valid d/l: %s."
+
+msgid "logs.activation.check.is_restore"
+msgstr "Is Restore: %s."
+
+msgid "logs.activation.check.wrong_step"
+msgstr "Wrong step.  You are being REDIRECTED."
+
+msgid "about"
+msgstr "The Teambox Sign-On Server is the cornerstone of all Teambox products, For more information about Teambox products and services, please visit our website at: %s"
+
+msgid "about.page_title"
+msgstr "About"
+
+msgid "info.no_license"
+msgstr "No license yet."
+
+msgid "activation.restore_backup_failed"
+msgstr "Failed to restore backup."
+
+msgid "activation.could_not_reactivate_from_backup"
+msgstr "Failed to reactivate the Teambox Sign-On Server from the backup."
+
+msgid "activation.step0.error.no_data"
+msgstr "You must select a file."
+
+msgid "activation.step3.error.no_data"
+msgstr "You must select a file or paste data."
+
+msgid "activation.step3.error.invalid_cert"
+msgstr "This is not a valid certificate."
+
+msgid "activation.step3.error.cert_does_not_match"
+msgstr "This certificate does not match your Teambox Sign-On Server key."
+
+msgid "activation.step3.error.internal"
+msgstr "Internal error."
+
+msgid "activation.step4.subject.request_domain_is"
+msgstr "Activation request for: %s"
+
+msgid "activation.step5.error.no_data"
+msgstr "You must select a file."
+
+msgid "activation.step5.error.invalid_kap"
+msgstr "Invalid .kap file"
+
+msgid "backup.page_doc"
+msgstr "This tool allows you to backup and restore the Teambox Sign-On Server configuration and database."
+
+msgid "backup.page_title"
+msgstr "Backup / Restore"
+
+msgid "basic_options.page_doc"
+msgstr "Here you can manage the Teambox Sign-On Server basic settings such as the administrative password, the user authentication method, the date and time, etc. Note that each \"Save\" button only updates the corresponding table."
+
+msgid "basic_options.page_title"
+msgstr "Basic Setup"
+
+msgid "forms.backup_now.fake_field.info"
+msgstr "This allows you to backup the Teambox Sign-On Server database and settings. It will automatically begin a file download."
+
+msgid "forms.basic_options.descr"
+msgstr "Basic Options"
+
+msgid "forms.basic_options.kas_address.pre_sep"
+msgstr "Teambox Main Application Server"
+
+msgid "forms.basic_options.kas_address.comment"
+msgstr "The Teambox Main Application Server is an optional Teambox component which provides the Teambox Sign-On Server with added functionality. If a such a server is present within your organization, its details must entered below so that its address is dispatched automatically to users of the Teambox Main Application Server through the Teambox Sign-On Server. If your organization does not have a Teambox Main Application Server this section should be omitted."
+
+msgid "forms.basic_options.kas_address.info"
+msgstr "Teambox App. server address"
+
+msgid "forms.basic_options.kas_address.help"
+msgstr "This is the address of the Teambox Main Application Server."
+
+msgid "forms.basic_options.kas_port.info"
+msgstr "Teambox App. server port"
+
+msgid "forms.basic_options.kas_port.help"
+msgstr "This is the port used when connecting to the Teambox Main Application Server."
+
+msgid "forms.basic_options.kpg_address.pre_sep"
+msgstr "Kryptiva Packaging Gateway"
+
+msgid "forms.basic_options.kpg_address.comment"
+msgstr "The Kryptiva Packaging Gateway (KPG) is an optional Teambox component which provides the TBXSOS with added functionality. If a KPG is present within your organization, its details must entered below so that the TBXSOS may communicate with it. If your organization does not have a KPG this section should be omitted."
+
+msgid "forms.basic_options.kpg_address.info"
+msgstr "KPG address"
+
+msgid "forms.basic_options.kpg_address.help"
+msgstr "This is the address of the Kryptiva Packaging Gateway."
+
+msgid "forms.basic_options.kpg_port.info"
+msgstr "KPG port"
+
+msgid "forms.basic_options.kpg_port.help"
+msgstr "This is the port used by the Teambox Sign-On Server when connecting to the KPG."
+
+msgid "forms.basic_options.smtp_server_port.help"
+msgstr "This is the port used by the Teambox Sign-On Server when connecting to the SMTP server; the default value 25."
+
+msgid "forms.basic_options.auth_mode.info"
+msgstr "User authentication method:"
+
+msgid "forms.basic_options.auth_mode.help"
+msgstr "When using the Teambox Sign-On Server User Management Database each user will have to be added individually. With LDAP authentication (Active Directory or Lotus Domino), users part of the LDAP groups specified on the server will have access to its services."
+
+msgid "forms.basic_options.auth_mode.pre_sep"
+msgstr "User Authentication Method"
+
+msgid "forms.basic_options.auth_mode.comment"
+msgstr "User access to the Teambox Sign-On Server can be managed either by using the internal User Management Database or by communicating with a local LDAP server. The current LDAP implementations supported are Active Directory and Lotus Domino. Once you've made your selection, the appropriate menu option will be enabled so that you can enter the details required."
+
+msgid "forms.basic_options.auth_mode.choices.kpsdb"
+msgstr "Teambox Sign-On Server database"
+
+msgid "forms.basic_options.auth_mode.choices.ldap_exchange"
+msgstr "Active Directory"
+
+msgid "forms.basic_options.auth_mode.choices.ldap_domino"
+msgstr "Lotus Domino"
+
+msgid "forms.basic_options.server_allow_html.help"
+msgstr "Enabling this option allows the Teambox Sign-On Server to package HTML emails."
+
+msgid "forms.basic_options.server_allow_html.info"
+msgstr "Allow HTML emails:"
+
+msgid "forms.basic_options.server_passverif.help"
+msgstr "Enter the same password as above."
+
+msgid "forms.basic_options.server_passverif.info"
+msgstr "Re-type password:"
+
+msgid "forms.basic_options.server_password.help"
+msgstr "The password used to connect to the Teambox Sign-On Server Configuration Interface."
+
+msgid "forms.basic_options.server_password.info"
+msgstr "Administration password:"
+
+msgid "forms.basic_options.title"
+msgstr "Basic Options"
+
+msgid "forms.datetime.datetime.help"
+msgstr "Allows you to change the date and time of the Teambox Sign-On Server. Enter your changes and press \"Save\"."
+
+msgid "forms.datetime.datetime.info"
+msgstr "no_longer_used"
+
+msgid "forms.datetime.descr"
+msgstr "Date and Time"
+
+# DEP msgid "forms.group.descr"
+# DEP msgstr "Divisions Management"
+msgid "forms.group.group_group_name.help"
+msgstr "This is the name of the corporate division."
+
+msgid "forms.group.group_group_name.info"
+msgstr "Division name:"
+
+msgid "forms.group.key_id.help"
+msgstr "Unless you've received special instructions from Teambox's Technical Support, you should use the default key."
+
+msgid "forms.group.key_id.info"
+msgstr "Key:"
+
+msgid "forms.identities_options.descr"
+msgstr "Identity Details"
+
+msgid "forms.identities_options.server_domains.help"
+msgstr "Type in the names of the domains the Teambox Sign-On Server will be associated with. For example, if your organization operates the domains xy-enterprise.com and finance-p.com and both need access to the Teambox Sign-On Server, the two domains must be listed here. Each domain must be separated by a space or a new line."
+
+msgid "forms.identities_options.server_domains.info"
+msgstr "Hosted domains:"
+
+msgid "forms.identities_options.server_kdn.help"
+msgstr "When signing emails, the Teambox Sign-On Server will use this name to identify your organization to recipients. Do not change it unless you are told to do so by Teambox's Technical Support."
+
+msgid "forms.identities_options.server_kdn.info"
+msgstr "Teambox Distinguished Name:"
+
+# DEP msgid "forms.teambox_options.title"
+# DEP msgstr "Hosted domains"
+msgid "forms.ldap_group_dn.add_group_dn.action_name"
+msgstr "Add"
+
+msgid "forms.ldap_group_dn.add_group_dn.help"
+msgstr "This allows you to add the LDAP groups which will have access to the Teambox Sign-On Server. To enter a group enter its Distinguished Name."
+
+msgid "forms.ldap_group_dn.add_group_dn.info"
+msgstr "Add group by Distinguished Name"
+
+msgid "forms.ldap_group_dn.list_group_dn.action_name"
+msgstr "Remove"
+
+msgid "forms.ldap_group_dn.list_group_dn.help"
+msgstr "This allows you to remove Teambox Sign-On Server access to the listed LDAP groups. To delete a group remove its Distinguished Name."
+
+msgid "forms.ldap_group_dn.group_dn_rename.info"
+msgstr "Edit selected Distinguished Name"
+
+msgid "forms.ldap_group_dn.group_dn_rename.action_name"
+msgstr "Rename"
+
+msgid "forms.ldap_group_dn.group_dn_rename.help"
+msgstr "This allows you to edit the Distinguished Name of the selected LDAP group."
+
+msgid "forms.ldap_group_dn.list_group_dn.info"
+msgstr "Currently associated Distinguished Names"
+
+msgid "forms.ldap_options.descr"
+msgstr "LDAP Configuration"
+
+msgid "forms.ldap_options.ldap_dn_base.help"
+msgstr "This is the Distinguished Name of the location of the user list on the LDAP server."
+
+msgid "forms.ldap_options.ldap_dn_base.info"
+msgstr "Directory base:"
+
+msgid "forms.ldap_options.ldap_domain.help"
+msgstr "The string specified in this field will be used to query the DNS server for the address of the domain controller."
+
+msgid "forms.ldap_options.ldap_domain.info"
+msgstr "Active Directory Domain:"
+
+msgid "forms.ldap_options.ldap_domain_search.help"
+msgstr "Activate this option to make the Teambox Sign-On Server search for domain controllers using the DNS server."
+
+msgid "forms.ldap_options.ldap_domain_search.info"
+msgstr "LDAP auto host lookup:"
+
+msgid "forms.ldap_options.ldap_host.help"
+msgstr "List of LDAP host:port (separated by spaces or new lines) the Teambox Sign-On Server can connect to. This will NOT be used if the \"LDAP auto host lookup\" option is set."
+
+msgid "forms.ldap_options.ldap_host.info"
+msgstr "LDAP Hosts:"
+
+msgid "forms.ldap_options.ldap_sys_dn.help"
+msgstr "This is the Distinguished Name of the account created for the Teambox Sign-On Server on the LDAP server."
+
+msgid "forms.ldap_options.ldap_sys_dn.info"
+msgstr "Teambox Sign-On Server username DN:"
+
+msgid "forms.ldap_options.ldap_sys_password.help"
+msgstr "Password set for the Teambox Sign-On Server account created in the directory."
+
+msgid "forms.ldap_options.ldap_sys_password.info"
+msgstr "Teambox Sign-On Server password:"
+
+msgid "forms.ldap_options.ldap_sys_password_verif.help"
+msgstr "Enter the same password as above."
+
+msgid "forms.ldap_options.ldap_sys_password_verif.info"
+msgstr "Re-type password:"
+
+msgid "forms.ldap_options.ldap_sys_username.help"
+msgstr "Username of the account created for the Teambox Sign-On Server in the directory."
+
+msgid "forms.ldap_options.ldap_sys_username.info"
+msgstr "Teambox Sign-On Server username:"
+
+msgid "forms.ldap_options.ldap_strict_address.help"
+msgstr "Enable this option to make the Teambox Sign-On Server use exact matching rules when querying the Lotus Domino server for email addresses. Otherwise, an algorithm similar to that used by Lotus Domino servers will be used."
+
+msgid "forms.ldap_options.ldap_strict_address.info"
+msgstr "Strict email matching:"
+
+msgid "forms.ldap_options.ldap_use_sasl.help"
+msgstr "Secure authentication means no password is exchanged between the Teambox Sign-On Server and the Active Directory server. This does not encrypt the communication between the Teambox Sign-On Server and Active Directory. Since all Active Directory servers support secure authentication this should be enabled."
+
+msgid "forms.ldap_options.ldap_use_sasl.info"
+msgstr "Use SASL:"
+
+msgid "forms.ldap_options.ldap_use_tls.help"
+msgstr "This encrypts communications between the Teambox Sign-On Server and Active Directory. You have to add the Certificate Authority service on your Active Directory server to use this option."
+
+msgid "forms.ldap_options.ldap_use_tls.info"
+msgstr "Use TLS:"
+
+msgid "forms.organization.org_name_is"
+msgstr "Organization:"
+
+msgid "forms.organization.org_keys_are"
+msgstr "Associated key(s):"
+
+msgid "forms.ldap_options.title"
+msgstr "LDAP Information"
+
+msgid "forms.organization.descr"
+msgstr "Organization Details"
+
+msgid "forms.organization.org_name.help"
+msgstr "This is the name of your organization."
+
+msgid "forms.organization.org_name.info"
+msgstr "Organization name:"
+
+msgid "forms.organization.users_are"
+msgstr "Users:"
+
+msgid "forms.organization.group_names_are"
+msgstr "Groups:"
+
+msgid "forms.organization.org_forward_to.help"
+msgstr "For archiving purposes, all outgoing emails packaged by the Teambox Sign-On Server can be forwarded to this address in their native format. Note that in order for this feature to function properly the appropriate fields must be completed in the \"Basic Setup\" page. Outgoing email archiving is optional."
+
+msgid "forms.organization.org_forward_to.info"
+msgstr "Archive email address:"
+
+msgid "forms.required_notice"
+msgstr "Marks required fields."
+
+msgid "forms.restore_now.backup_file.action_name"
+msgstr "Restore"
+
+msgid "forms.restore_now.backup_file.help"
+msgstr "This allows you to restore the Teambox Sign-On Server database and settings from a backup you've previously downloaded."
+
+msgid "forms.restore_now.backup_file.info"
+msgstr "File:"
+
+msgid "forms.restore_now.descr"
+msgstr "Restore"
+
+msgid "forms.sec_emails.add_sec_email.action_name"
+msgstr "Add"
+
+msgid "forms.sec_emails.add_sec_email.help"
+msgstr "This allows you to add secondary email addresses."
+
+msgid "forms.sec_emails.add_sec_email.info"
+msgstr "Add secondary email address:"
+
+msgid "forms.sec_emails.list_sec_email.action_name"
+msgstr "Remove"
+
+msgid "forms.sec_emails.list_sec_email.help"
+msgstr "This allows you to delete secondary email addresses."
+
+msgid "forms.sec_emails.list_sec_email.info"
+msgstr "Currently associated secondary email addresses:"
+
+msgid "forms.sec_emails.sec_email_rename.action_name"
+msgstr "Rename"
+
+msgid "forms.sec_emails.sec_email_rename.help"
+msgstr "This allows you to modify secondary email addresses."
+
+msgid "forms.sec_emails.sec_email_rename.info"
+msgstr "Modify selected secondary email address:"
+
+msgid "forms.sec_email_addr.fake_sec_addr.help"
+msgstr "You can add or remove secondary emails associated to this account."
+
+msgid "forms.test_packaging.descr"
+msgstr "Packaging test"
+
+msgid "forms.test_packaging.from_email_address.help"
+msgstr "This is the user's email address, enter the same address you've configured in the Teambox Sign-On Server User Management Database or in the LDAP server."
+
+msgid "forms.test_packaging.from_email_address.info"
+msgstr "'From' email address:"
+
+msgid "forms.test_packaging.from_full_name.help"
+msgstr "This is the user's full name, enter the same name you've configured in the Teambox Sign-On Server User Management Database or in the LDAP server."
+
+msgid "forms.test_packaging.from_full_name.info"
+msgstr "'From' full name:"
+
+msgid "forms.test_packaging.password.help"
+msgstr "This is the user's password, enter the same password you've configured in the Teambox Sign-On Server User Management Database or in the LDAP server."
+
+msgid "forms.test_packaging.password.info"
+msgstr "Password:"
+
+msgid "forms.test_packaging.password_verif.help"
+msgstr "Enter the same password as above."
+
+msgid "forms.test_packaging.password_verif.info"
+msgstr "Re-type password:"
+
+msgid "forms.test_packaging.username.help"
+msgstr "This is the user's login, enter the same login you've configured in the Teambox Sign-On Server User Management Database or in the LDAP server."
+
+msgid "forms.test_packaging.username.info"
+msgstr "Login:"
+
+msgid "forms.update_now.descr"
+msgstr "Manual Updates"
+
+msgid "forms.update_now.update_file.action_name"
+msgstr "Update"
+
+msgid "forms.update_now.update_file.help"
+msgstr "To apply a Teambox Sign-On Server update select a valid update file using \"Browse\" and press the \"Update Now\" button."
+
+msgid "forms.update_now.update_file.info"
+msgstr "File:"
+
+msgid "forms.update_options.descr"
+msgstr "Automatic Updates"
+
+msgid "forms.update_options.ldap_sys_password_verif.help"
+msgstr "Enter the same password as above."
+
+msgid "forms.update_options.ldap_sys_password_verif.info"
+msgstr "Re-type password:"
+
+msgid "forms.update_options.server_daily_updates.help"
+msgstr "Enables daily updates of the Teambox Sign-On Server components. Updates will be downloaded and installed automatically."
+
+msgid "forms.update_options.server_daily_updates.info"
+msgstr "Enable daily updates:"
+
+msgid "forms.update_options.server_update_password.help"
+msgstr "Password used to access the Teambox update site. This is attributed to you automatically; do not change it unless you are told to do so by Teambox's Technical Support."
+
+msgid "forms.update_options.server_update_password.info"
+msgstr "Updates password:"
+
+msgid "forms.update_options.server_update_site.help"
+msgstr "This is Teambox's update site address; do not change it unless you are told to do so by Teambox's Technical Support."
+
+msgid "forms.update_options.server_update_site.info"
+msgstr "Updates site:"
+
+msgid "forms.update_options.server_update_username.help"
+msgstr "Username used to access the Teambox update site. This is attributed to you automatically; do not change it unless you are told to do so by Teambox's Technical Support."
+
+msgid "forms.update_options.server_update_username.info"
+msgstr "Updates username:"
+
+msgid "forms.user.descr"
+msgstr "Login Information"
+
+msgid "forms.user.key_id.help"
+msgstr "Unless you've received special instructions from Teambox's Technical Support, you should use the default key."
+
+msgid "forms.user.key_id.info"
+msgstr "Key:"
+
+msgid "forms.user.login_passwd.help"
+msgstr "This is the password the user will need to set in his Teambox plugin to obtain a Teambox Sign-On Server \"login ticket\"."
+
+msgid "forms.user.login_passwd.info"
+msgstr "Password:"
+
+msgid "forms.user.login_passwd_verif.help"
+msgstr "Enter the same password as above."
+
+msgid "forms.user.login_passwd_verif.info"
+msgstr "Re-type password:"
+
+msgid "forms.user.login_user_name.help"
+msgstr "This is the login the user will need to set in his Teambox plugin to obtain a Teambox Sign-On Server \"login ticket\"."
+
+msgid "forms.user.login_user_name.info"
+msgstr "Login name:"
+
+msgid "forms.user.user_created_on.info"
+msgstr "Created on:"
+
+msgid "forms.user.note_note.info"
+msgstr "Note:"
+
+msgid "forms.user.pemail_email_address.help"
+msgstr "This is the user's primary email address within your organization. ie: john@xy-enterprise.com"
+
+msgid "forms.user.pemail_email_address.info"
+msgstr "Email address:"
+
+msgid "forms.user.user_full_name.help"
+msgstr "This is the user's full name, it must be typed exactly as it appears in his email client application. It is case-sensitive."
+
+msgid "forms.user.user_full_name.info"
+msgstr "Full name:"
+
+msgid "framework.field.error.invalid_email_address"
+msgstr "Invalid email address."
+
+msgid "framework.field.error.invalid_internet_domain"
+msgstr "Invalid domain name."
+
+msgid "framework.field.error.invalid_internet_domain_name"
+msgstr "The entered %s domain is invalid."
+
+msgid "framework.field.error.invalid_value"
+msgstr "Invalid value."
+
+msgid "framework.field.error.invalid_value_name"
+msgstr "The '%s' field contains an invalid value."
+
+msgid "framework.field.error.maximum_integer_value"
+msgstr "The maximum value is %d."
+
+msgid "framework.field.error.maximum_length"
+msgstr "The maximum length is %d."
+
+msgid "framework.field.error.minimum_integer_value"
+msgstr "The minimum value is %d."
+
+msgid "framework.field.error.minimum_length"
+msgstr "The minimum length is %d."
+
+msgid "framework.field.error.must_be_a_number"
+msgstr "The value entered must be a number."
+
+msgid "framework.field.error.must_be_filled"
+msgstr "This information is required."
+
+msgid "framework.field.error.must_be_filled_name"
+msgstr "The '%s' field is required"
+
+msgid "framework.field.error.verification_password_no_match"
+msgstr "The passwords entered do not match."
+
+msgid "framework.form.error.there_are_errors"
+msgstr "There are errors in the form. Check error messages below:"
+
+msgid "groups.page_doc"
+msgstr "Here is a list of the different corporate divisions created on the Teambox Sign-On Server. The Distinguished Name of each LDAP group associated to a division is also displayed. Users part of the LDAP groups listed will therefore be able to use the server."
+
+msgid "groups.page_title"
+msgstr "LDAP Setup"
+
+msgid "index.page_title"
+msgstr "Teambox Sign-On Server"
+
+msgid "info.page_doc"
+msgstr "This page displays a summary of your Teambox Sign-On Server settings and status."
+
+msgid "info.page_title"
+msgstr "Dashboard"
+
+msgid "info.reboot.link"
+msgstr "Reboot Teambox Sign-On Server"
+
+msgid "info.stats.link"
+msgstr "View Teambox Sign-On Server usage statistics"
+
+msgid "info.reboot.ok"
+msgstr "Teambox Sign-On Server is rebooting. Please wait a few minutes."
+
+msgid "info.reboot.failed"
+msgstr "Failed to reboot Teambox Sign-On Server."
+
+msgid "keys.page_title"
+msgstr "Public Encryption Keys"
+
+msgid "teambox_options.page_doc"
+msgstr "This page allows you to manage the Teambox Sign-On Server licensed seats available to your organization and its users. The second page, \"Hosted Domains\" is used to enter the domains this Teambox Sign-On Server will be associated with."
+
+msgid "teambox_options.page_title"
+msgstr "License Management"
+
+msgid "ldap_config.page_doc"
+msgstr "These settings will allow you to configure the Teambox Sign-On Server to use your LDAP server as a backend for user access management. Currently, the supported LDAP implementations are Active Directory and Lotus Domino. The information entered here is critical; errors will most likely result in users not being able to use the Teambox Sign-On Server. The LDAP groups associated to the Teambox Sign-On Server are managed on the \"Divisions\" page."
+
+msgid "ldap_config.page_title"
+msgstr "LDAP Setup"
+
+msgid "licenses.page_doc"
+msgstr "REPLACED"
+
+msgid "licenses.page_title"
+msgstr "License Management"
+
+msgid "logs.forms.view.button"
+msgstr "View Log"
+
+msgid "logs.forms.download.button"
+msgstr "Download Log"
+
+msgid "logs.forms.pack.button"
+msgstr "Download All Logs"
+
+msgid "logs.page_doc"
+msgstr "This page allows you to view various Teambox Sign-On Server system logs, the most recent log entries are displayed at the bottom and are limited to 100 lines. If you are experiencing difficulty with the Teambox Sign-On Server, check the logs for errors. Using the appropriate button, you can choose to download the various logs independently or download a compressed file containing all the logs. We recommend that you archive your logs."
+
+msgid "logs.page_title"
+msgstr "Logs"
+
+msgid "misc.forms.dont_change_if_not_told_to"
+msgstr "Do not change the value of this field unless you are told do so by Teambox's Technical Support."
+
+msgid "misc.forms.reset"
+msgstr "Reset"
+
+msgid "misc.forms.save"
+msgstr "Save"
+
+msgid "misc.forms.test"
+msgstr "Test"
+
+msgid "misc.forms.back_link"
+msgstr "Back"
+
+msgid "misc.message.failed"
+msgstr "Failed"
+
+msgid "misc.message.success"
+msgstr "Success"
+
+msgid "misc.forms.add"
+msgstr "Add"
+
+msgid "misc.forms.edit"
+msgstr "Edit"
+
+msgid "misc.forms.delete"
+msgstr "Delete"
+
+msgid "misc.forms.are_you_sure"
+msgstr "Are you sure?"
+
+msgid "organizations.page_doc"
+msgstr "This page allows Application Service Providers (ASP) to manage the different organizations associated to this Teambox Sign-On Server. If you are not an ASP, the only organization listed should be yours."
+
+msgid "organizations.page_title"
+msgstr "Organizations"
+
+msgid "organizations.update.ok"
+msgstr "Organization settings saved successfully."
+
+msgid "updates.page_doc"
+msgstr "Here are the Teambox Sign-On Server updates settings, it can be configured to update its component automatically or manually."
+
+msgid "updates.page_title"
+msgstr "Updates"
+
+msgid "updates.result.no_file_uploaded"
+msgstr "Please select a file using \"Browse...\" before clicking on the \"Update Now\" button."
+
+msgid "user.authentication.method.ldap_exchange"
+msgstr "Active Directory"
+
+msgid "user.authentication.method.ldap_domino"
+msgstr "Lotus Domino"
+
+msgid "user.authentication.method.local"
+msgstr "Local database"
+
+msgid "users.page_doc"
+msgstr "Here is the Teambox Sign-On Server user Management Database, it allows you to give users access to the Teambox Sign-On Server without the use of an LDAP server."
+
+msgid "users.page_title"
+msgstr "User Management"
+
+msgid "version"
+msgstr "v1.3.0"
+
+msgid "organizations.could_not_create"
+msgstr "An error occured while creating the organisation."
+
+msgid "organizations.org_not_found"
+msgstr "Organisation not found."
+
+msgid "organizations.could_not_update_org"
+msgstr "An error occurred while updating the organization information."
+
+msgid "organizations.could_not_find"
+msgstr "Organisation not found."
+
+msgid "organizations.could_not_delete_maybe_not_empty"
+msgstr "An error occurred while deleting this organization, make sure it is empty."
+
+msgid "organization.upload_kap.successful"
+msgstr "Activation Packet file was processessed successfully."
+
+msgid "organization.upload_kap.failed"
+msgstr "Activation Packet file could not be processed."
+
+msgid "organization.upload_kap.not_activated_yet"
+msgstr "This organization is not activated yet."
+
+msgid "groups.you_must_create_org_first"
+msgstr "You must first create an organization."
+
+msgid "groups.key_not_valid"
+msgstr "This key is not valid."
+
+msgid "groups.could_not_create"
+msgstr "Could not successfully create group."
+
+msgid "groups.could_not_save"
+msgstr "Could not successfully save group."
+
+msgid "groups.group_dn_duplicate_key"
+msgstr "This group DN already exists."
+
+msgid "groups.failed_to_update_profile"
+msgstr "Failed to update profile."
+
+msgid "groups.failed_to_insert_group_dn"
+msgstr "Failed to add group DN."
+
+msgid "groups.update_successful"
+msgstr "Update successful."
+
+msgid "groups.failed_to_remove_group_dn"
+msgstr "Failed to remove group DN."
+
+msgid "groups.failed_to_rename_group_dn"
+msgstr "Failed to rename group DN."
+
+msgid "groups.deleted_successfully"
+msgstr "Division deleted successfully."
+
+msgid "groups.failed_to_remove_group"
+msgstr "Failed to remove group."
+
+msgid "licenses.seats.freed_successfully"
+msgstr "License seat freed successfully."
+
+msgid "licenses.seats.failed_to_free"
+msgstr "Failed to free license seat."
+
+msgid "options.saved_successfully"
+msgstr "Option changes applied successfully."
+
+msgid "options.saved_but_server_did_not_restart"
+msgstr "Options were saved, but key components did not restart. Check the \"Logs\" page."
+
+msgid "options.saved_but_server_not_running"
+msgstr "Options were saved, but key components are not running. Please restart the Teambox Sign-On Server to solve this problem."
+
+msgid "options.failed_to_redirect"
+msgstr "Failed to redirect."
+
+msgid "options.failed_to_save_options"
+msgstr "Failed to save options."
+
+msgid "tests.packaging_test"
+msgstr "Packaging test"
+
+msgid "logs.tests.packaging.succeed"
+msgstr "Packaging Test Succeeded"
+
+msgid "logs.tests.packaging.failed"
+msgstr "Packaging Test Failed"
+
+msgid "updates.update_now.successful"
+msgstr "Update successful."
+
+msgid "updates.update_now.failed"
+msgstr "Update failed.  Check the 'Logs' page for more informations."
+
+msgid "updates.update_now.internal_problem"
+msgstr "Internal problem, the update components are not working."
+
+msgid "users.you_must_first_create_organization"
+msgstr "You must first create an organization."
+
+msgid "users.user_created_successfully"
+msgstr "User created successfully."
+
+msgid "users.user_created_successfully_but_could_not_save_login"
+msgstr "User created successfully but login could not be saved."
+
+msgid "users.create_user_failed"
+msgstr "Failed to create user."
+
+msgid "users.user_saved_successfully"
+msgstr "User saved successfully."
+
+msgid "users.user_saved_successfully_but_could_not_save_login"
+msgstr "User saved successfully but login could not be saved."
+
+msgid "users.delete_user_failed"
+msgstr "Failed to delete user."
+
+msgid "users.update_user_failed"
+msgstr "Failed to update user."
+
+msgid "users.user_deleted_successfully"
+msgstr "User deleted successfully."
+
+msgid "users.sec_email_add_success"
+msgstr "Secondary email address added successfully."
+
+msgid "users.sec_email_add_failed"
+msgstr "Failed to add secondary email address."
+
+msgid "users.sec_email_remove_success"
+msgstr "Secondary email address removed successfully."
+
+msgid "users.sec_email_remove_failed"
+msgstr "Failed to remove secondary email address."
+
+msgid "users.sec_email_rename_failed"
+msgstr "Failed to rename secondary email address."
+
+msgid "views.activation.cancel.doc"
+msgstr "<p>Cancelling activation means you will loose all data related to the activation. Are you sure you want to cancel activation?</p>"
+
+msgid "views.activation.cancel_activation.yes"
+msgstr "Cancel activation"
+
+msgid "views.activation.cancel_activation.no"
+msgstr "Return to previous page"
+
+msgid "views.activation.step0.title"
+msgstr "Teambox Sign-On Server Activation Process"
+
+msgid "views.activation.step0.main_advanced.doc"
+msgstr "Advanced mode allows you to restore from a previous backup."
+
+msgid "views.activation.step0.main"
+msgstr "Return to basic mode"
+
+msgid "views.activation.step0.advanced"
+msgstr "Advanced mode"
+
+msgid "views.activation.step0.submit_start_activation"
+msgstr "Start activation >>"
+
+msgid "views.activation.step0.doc.backup_keys"
+msgstr "<p>Some keys have been generated for this Teambox Sign-On Server. You should back them up now. Keys are sensitive information and should be kept safe.</p>"
+
+msgid "views.activation.step0.submit_backup_keys"
+msgstr "Download keys backup"
+
+msgid "views.activation.step0.doc.restore_keys"
+msgstr "You can restore keys here if asked to by Teambox support."
+
+msgid "views.activation.step0.submit_restore_keys"
+msgstr "Restore keys"
+
+msgid "activation.step0.notice.keys_restored"
+msgstr "Keys have been restored. You can start the activation."
+
+msgid "views.activation.step0.doc"
+msgstr "<p>Now that you've completed the installation, the Teambox Sign-On Server Activation Process must be completed for the server to be functional. You will not need to repeat this procedure unless the Teambox Sign-On Server is reinstalled.</p> <p>The goal of the Teambox Sign-On Server Activation Process is to enable Opersys to validate your organization's identity and its location. Having completed this procedure, Opersys will provide you an Activation Package. The process involves five steps, one of which will require an SSL Certificate from one of the following Certificate Authorities: Verisign, Entrust or Thawte.</p> <p>Here are the Activation Process steps:</p> <p>1. Certificate Form</p> <p>2. Certificate Signing Request Submission</p> <p>3. SSL Certificate Upload</p> <p>4. Teambox Sign-On Server Activation Request</p> <p>5. Teambox Sign-On Server Activation Package</p> <p>Each step will include precise instructions, click on \"Start Activation\" to begin.</p>"
+
+msgid "views.activation.step0.doc.restore"
+msgstr "If you have a backup from a previous Teambox Sign-On Server installation, you can restore yours configuration and settings here."
+
+msgid "views.activation.step0.backup_file"
+msgstr "Backup file:"
+
+msgid "views.activation.step0.submit_restore"
+msgstr "Restore"
+
+msgid "views.activation.step1.title.cert"
+msgstr "1. Certificate Form"
+
+msgid "views.activation.step1.title.additional_info"
+msgstr "Additionnal information"
+
+msgid "views.activation.step1.doc"
+msgstr "In order to obtain an SSL Certificate from a Certificate Authority (CA) you will need to send them a Certificate Signing Request (CSR). The Teambox Sign-On Server Activation Process will generate a CSR for you based on the information you enter in the following form. It is therefore paramount that the information entered here be accurate."
+
+msgid "views.activation.step1.doc.contact_info"
+msgstr "The following information is required and will be used by Opersys to contact you if the need arises."
+
+msgid "views.activation.step1.csr.country"
+msgstr "Country (C):"
+
+msgid "views.activation.step1.csr.state"
+msgstr "State (ST):"
+
+msgid "views.activation.step1.csr.location"
+msgstr "Location (L):"
+
+msgid "views.activation.step1.csr.organization"
+msgstr "Organisation (O):"
+
+msgid "views.activation.step1.csr.org_unit"
+msgstr "Organisational unit (OU):"
+
+msgid "views.activation.step1.csr.email"
+msgstr "Email (emailAddress):"
+
+msgid "views.activation.step1.csr.domain_name"
+msgstr "Domain name (CN):"
+
+msgid "views.activation.step1.csr.contact_name"
+msgstr "Contact name:"
+
+msgid "views.activation.step1.csr.contact_email"
+msgstr "Contact email:"
+
+msgid "views.activation.step2.title"
+msgstr "2. Certificate Signing Request Submission"
+
+msgid "views.activation.step2.doc"
+msgstr "Here is the CSR you need to submit to the CA. You can either download it as a \".pem\" file or copy-paste the text bellow. If you copy-paste the text version of the CSR, make sure you include all the characters, including the beginning and ending markers."
+
+msgid "views.activation.step2.download_pem"
+msgstr "Download as .pem"
+
+msgid "views.activation.misc.cancel_activation"
+msgstr "Cancel activation"
+
+msgid "views.activation.step3.title"
+msgstr "3. SSL Certificate Upload"
+
+msgid "views.activation.step3.doc"
+msgstr "<p>Once you've submitted your CSR to the CA they will conduct the appropriate verifications and emit an SSL Certificate for you. This certificate must be uploaded to the Teambox Sign-On Server.</p> <p>The certificate you have obtained, along with other information, will be used to generate a Teambox Sign-On Server Activation Request.</p> <p>As with the CSR, you can either upload the SSL Certificate as a \".pem\" file or copy-paste it in text form. Again, if you choose to use the text form of the SSL Certificate, make sure you include all characters.</p>"
+
+msgid "views.activation.step3.upload_cert"
+msgstr "Upload certificate:"
+
+msgid "views.activation.step3.paste_cert"
+msgstr "Paste certificate:"
+
+msgid "views.activation.misc.previous"
+msgstr "<< Previous"
+
+msgid "views.activation.misc.next"
+msgstr "Next >>"
+
+msgid "views.activation.step4.title"
+msgstr "4. Sending the Teambox Sign-On Server Activation Request"
+
+msgid "views.activation.step4.doc"
+msgstr "<p>The Teambox Sign-On Server has generated your Activation Request. You must send this Activation Request to Opersys so that we can send you your Activation Package.</p> <p>Clicking on the link bellow will open a new email message in your default email application with a pre-configured address. Download the \"kar.bin\" file and attach it to the email.</p>"
+
+msgid "views.activation.step4.download_kar"
+msgstr "Download \"kar.bin\""
+
+msgid "views.activation.step5.title"
+msgstr "5. Receiving Teambox Sign-On Server Activation Package"
+
+msgid "views.activation.step5.doc"
+msgstr "This is is the last step of the activation process. Once you've received the Activation Package, the \"kap.bin\" file, it must be uploaded to the Teambox Sign-On Server."
+
+msgid "views.activation.step5.path_to_file"
+msgstr "Upload \"kap.bin\":"
+
+msgid "views.activation.step5.activate"
+msgstr "Activate Teambox Sign-On Server"
+
+msgid "views.activation.step6.title"
+msgstr "Teambox Sign-On Server Activation Complete"
+
+msgid "views.activation.step6.doc"
+msgstr "<p>The Teambox Sign-On Server has been activated, remember that you will have to repeat this process if the Teambox Sign-On Server is reinstalled and you don't have a backup to restore the installation.</p> <p>Click on the link bellow to go to the Teambox Sign-On Server Configuration Interface.</p>"
+
+msgid "views.activation.step6.go_to_dashboard"
+msgstr "Go to Dashboard"
+
+msgid "views.backup.list.backup"
+msgstr "Backup"
+
+msgid "views.backup.list.download_backup"
+msgstr "Download"
+
+msgid "views.backup.list.restore"
+msgstr "Restore"
+
+msgid "views.misc.whats_this"
+msgstr "What's<nbsp>this?"
+
+msgid "views.errors.error.doc"
+msgstr "An error occurred while you were using the Configuration Interface. Further details are displayed below. If you are requested to do so by the Teambox Technical Support team, you can send them the error message by clicking"
+
+msgid "views.errors.error.please_explain\n"
+msgstr ""
+"== Please explain what you were doing at the time of this error:\n"
+"\n"
+"\n"
+"\n"
+"== Technical information about the error\n"
+"\n"
+
+msgid "views.errors.error.send_to_support"
+msgstr "Send to support@teambox.co"
+
+msgid "views.errors.error.error_message"
+msgstr "Error message"
+
+msgid "views.errors.error.error_trace"
+msgstr "Error trace"
+
+msgid "views.errors.error.show_error_trace"
+msgstr "Error trace"
+
+msgid "views.errors.error.system_information"
+msgstr "System information"
+
+msgid "views.errors.error.show_system_information"
+msgstr "System information"
+
+msgid "views.groups.edit.formtitle.division"
+msgstr "Edit Division"
+
+msgid "views.groups.edit.formtitle.group_dn"
+msgstr "LDAP Group DNs"
+
+msgid "views.groups.edit.link_to.back"
+msgstr "Back to Divisions"
+
+msgid "views.groups.list.division_name"
+msgstr "Division name"
+
+msgid "views.groups.list.group_dn"
+msgstr "LDAP group DNs"
+
+msgid "views.groups.list.add_division"
+msgstr "Add new division"
+
+msgid "views.groups.list.back_ldap_setup"
+msgstr "Back to LDAP setup"
+
+msgid "views.groups.new.formtitle"
+msgstr "Add Division"
+
+msgid "views.groups.new.link_to.back"
+msgstr "Back to Divisions"
+
+msgid "views.index.index.password"
+msgstr "Password:"
+
+msgid "views.index.index.action_login"
+msgstr "Login"
+
+msgid "views.info.list.tbxsos_version"
+msgstr "Server Version:"
+
+msgid "views.info.list.date"
+msgstr "Date:"
+
+msgid "views.info.list.act_status"
+msgstr "Activation Status:"
+
+msgid "views.info.list.activated"
+msgstr "Activated"
+
+msgid "views.info.list.unlimited"
+msgstr "Unlimited"
+
+msgid "views.info.list.user_auth_method"
+msgstr "User Authentication Method:"
+
+msgid "views.info.list.running_status"
+msgstr "Internal Components:"
+
+msgid "views.info.list.tbxsosd_running"
+msgstr "Operational"
+
+msgid "views.info.list.tbxsosd_not_running"
+msgstr "Non-operational"
+
+msgid "views.info.list.kps_database_user_count"
+msgstr "Database User Count:"
+
+msgid "views.info.list.total_lic_seats"
+msgstr "Total Licensed Seats:"
+
+msgid "views.info.list.used_lic_seats"
+msgstr "Used Licensed Seats:"
+
+msgid "views.info.list.doc.tools"
+msgstr "The following tools are provided for diagnostic and monitoring purposes."
+
+msgid "views.info.list.link_to.test_kps"
+msgstr "Test Teambox Sign-On Server Settings"
+
+msgid "views.keys.list.doc"
+msgstr "<p>This page lists public encryption keys that the Teambox Sign-On Server server hosts. They are used to encrypt messages sent to you by other Teambox clients.  They need to be listed in the Teambox Online Services so they can be used by other clients.</p> <p>Copy/paste the key you want to have listed online in a <b>signed</b> mail message to %s along with the domain or subdomain name you want that key to be associated with.</p>"
+
+msgid "views.teambox_options.list.link_to.licenses"
+msgstr "Licenses"
+
+msgid "views.layouts._standard_field_datetime.date"
+msgstr "Date:"
+
+msgid "views.layouts._standard_field_datetime.year"
+msgstr "Year"
+
+msgid "views.layouts._standard_field_datetime.month"
+msgstr "Month"
+
+msgid "views.layouts._standard_field_datetime.day"
+msgstr "Day"
+
+msgid "views.layouts._standard_field_datetime.time"
+msgstr "Time:"
+
+msgid "views.layouts._standard_field_datetime.hour"
+msgstr "Hour"
+
+msgid "views.layouts._standard_field_datetime.minute"
+msgstr "Minute"
+
+msgid "views.layouts._standard_field_datetime.second"
+msgstr "Second"
+
+msgid "views.layouts._standard_menu.undefined_yet"
+msgstr "This menu is undefined yet."
+
+msgid "views.misc.title"
+msgstr "Teambox Sign-On Server Administration"
+
+msgid "views.misc.copyright"
+msgstr "© 2007-2012 Opersys inc. All rights reserved."
+
+msgid "views.misc.close_help_window"
+msgstr "Close help window"
+
+msgid "views.ldap_config.list.link_to.ldap_groups"
+msgstr "LDAP Groups"
+
+msgid "views.licenses.list.doc"
+msgstr "This page displays details regarding the licensed seat usage of this Teambox Sign-On Server. It also allows you to liberate seats according to your needs. If you wish to purchase more seats contact an Opersys sales representative."
+
+msgid "views.licenses.list.reached_lim"
+msgstr "You have reached your maximum number of seats. Please consult with an Opersys Sales representative immediatly or free some seats using the seat managed below."
+
+msgid "views.licenses.list.number_of_seats"
+msgstr "Number of license seats:"
+
+msgid "views.licenses.list.number_of_used_seats"
+msgstr "Number of used seats:"
+
+msgid "views.licenses.list.lim_seats"
+msgstr "Maximum seats allowed"
+
+msgid "views.licenses.list.max_seats"
+msgstr "Maximum seats allowed"
+
+msgid "views.licenses.list.total_used_seats"
+msgstr "Total number of used seats"
+
+msgid "views.licenses.list.orgs.organizations"
+msgstr "Organizations"
+
+msgid "views.licenses.list.orgs.used_seats"
+msgstr "Used seats"
+
+msgid "views.licenses.list.orgs.allocated_seats"
+msgstr "Allocated seats"
+
+msgid "views.licenses.list.orgs.link_edit_seats"
+msgstr "Edit seats"
+
+msgid "views.licenses.list.seats_list"
+msgstr "Seats:"
+
+msgid "views.licenses.list.no_seats"
+msgstr "No seats are used."
+
+msgid "views.licenses.list.no_seats_reseller"
+msgstr "No seats are used for this organization."
+
+msgid "views.seats.list.link_to.delete"
+msgstr "Free&nbsp;seat"
+
+msgid "views.licenses.list.link_to.back"
+msgstr "Back to Teambox identities"
+
+msgid "views.organizations.list.doc"
+msgstr "This is a list of organizations linked to this Teambox Sign-On Server.  <i>Users</i> are relevant for Teambox servers that are not connected to a local network infrastructure.  <i>Divisions</i> are only relevant for servers using a local Microsoft Active Directory backend."
+
+msgid "views.organizations.list.link_to.add_org"
+msgstr "Add organization"
+
+msgid "views.organizations.list.link_to.edit_org"
+msgstr "Edit organization"
+
+msgid "views.organizations.list.link_to.delete_org"
+msgstr "Delete organization"
+
+msgid "views.organizations.edit.link_to.back"
+msgstr "Back to Organizations"
+
+msgid "views.organization.upload_kap.label"
+msgstr "Upload Activation Packet:"
+
+msgid "views.organization.upload_kap.submit"
+msgstr "Upload"
+
+msgid "views.organizations.list.link_to.edit_users"
+msgstr "Edit users"
+
+msgid "views.organizations.list.link_to.edit_groups"
+msgstr "Edit groups"
+
+msgid "views.tests._head.title"
+msgstr "Tests"
+
+msgid "views.tests._head_doc.doc"
+msgstr "To test your Teambox Sign-On Server settings, input the correct information in each field and press the test button; use the details of any user you've configured the Teambox Sign-On Server for. If the test is succesfull, configure the Teambox Sign-On Server for other users using the method employed for the tested user. You can then configure their plugins using the information inputed here. If the test fails, make sure you've made no mistakes in the fields you've entered. If the information supplied is correct, check you Teambox Sign-On Server configuration."
+
+msgid "views.tests.test.succeeded"
+msgstr "Succeeded."
+
+msgid "views.tests.test.failed"
+msgstr "Failed."
+
+msgid "views.tests.test.link_to.back"
+msgstr "Back"
+
+msgid "views.updates.update.title"
+msgstr "Teambox Sign-On Server update results"
+
+msgid "views.updates.update.doc"
+msgstr "<p>This is the output of the commands run internally by the Teambox Sign-On Server to update its software.  Please examine this output carefully to locate potential errors. Note that you may see harmless warning, which are lines starting by W.</p><p>If you see any error, please make sure you have inserted the right type of media in the Teambox Sign-On Server computer.</p>"
+
+msgid "views.users.edit.formtitle.edit_user"
+msgstr "Edit user"
+
+msgid "views.users.edit.formtitle.sec_emails"
+msgstr "Secondary emails"
+
+msgid "views.users.edit.link_to.back_users"
+msgstr "Back to users list"
+
+msgid "views.users.list.link_to.edit"
+msgstr "Edit"
+
+msgid "views.users.list.link_to.delete"
+msgstr "Delete"
+
+msgid "views.users.list.link_to.add"
+msgstr "Add new user"
+
+msgid "views.users.list.full_name"
+msgstr "Full name"
+
+msgid "views.users.list.pri_email"
+msgstr "Primary email"
+
+msgid "views.users.new.formtitle.add_user"
+msgstr "Add user"
+
+msgid "views.users.new.link_to.back_users"
+msgstr "Back to users list"
+
+msgid "stats.page_title"
+msgstr "Usage Statistics"
+
+msgid "stats.page_doc"
+msgstr "This page displays the Teambox Sign-On Server usage statistics. You can view the values for the current or previous week."
+
+msgid "views.stats.no_stats_yet"
+msgstr "There are no statistics yet."
+
+msgid "views.stats.current_week"
+msgstr "Current week"
+
+msgid "views.stats.last_week"
+msgstr "Previous week"
+
+msgid "views.stats.last_updated"
+msgstr "Last updated: %s"
+
+msgid "views.stats.graph.nbpergroup"
+msgstr "Number of connections per hour"
+
+msgid "views.stats.graph.avgdelay"
+msgstr "Average wait time (connection to disconnection)"
+
+msgid "errors.link_to.check_logs"
+msgstr "Check logs"
+
+msgid "login.failed"
+msgstr "Login failed."
+
+msgid "login.failed.empty_password"
+msgstr "Empty password.  Set the password by typing 'setup' in the system console."
+
+msgid "info.general_infos.descr"
+msgstr "General Information"
+
+msgid "info.tools.descr"
+msgstr "Tools"
+
+

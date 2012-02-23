@@ -1,0 +1,8 @@
+<% ### RESTORE PREVIOUS TOTAL BACKUP ### %>
+<div class="doc"><%= GTEH_("views.activation.step0.doc.restore") %></div>
+<% form_tag({:action => 'step0_restore'}, :multipart => true) do %>
+  <label for="cert_file_data"><%= GTEH_("views.activation.step0.backup_file") %></label>
+  <input type="file" name="backup_data" size="25" />
+  <%= submit_tag GT_("views.activation.step0.submit_restore") %>
+<% end %>
+

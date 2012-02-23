@@ -1,0 +1,10 @@
+<h2><%= @page_title %></h2>
+
+<%= render :partial => 'doc' %>
+
+<%= render :partial => 'org' %>
+
+<%= render :partial => 'layouts/standard_form', :locals => {:controller => "users", :action => "create", :formtitle => GTEH_("views.users.new.formtitle.add_user")} %>
+
+<%= link_to GT_("views.users.new.link_to.back_users"), {:action => 'list', :org_id => @org_id}, {:class => "back_link"} %>
+

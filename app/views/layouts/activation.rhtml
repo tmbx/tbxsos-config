@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15" />
+    <title><%= GT_("views.misc.title") %></title>
+    <%= stylesheet_link_tag "common-style" %>
+    <%= stylesheet_link_tag "activation-style" %>
+    <%= javascript_include_tag :defaults %>
+  </head>
+
+  <body>
+
+      <div id="activation">
+
+        <div class="right">
+          <%= link_to GTEH_("menu.label.logout"), {:action => 'logout', :controller => 'login'} %>
+        </div>
+        <div style="clear:both"></div>
+
+        <%= render :partial => 'layouts/standard_flash' %>
+
+        <%= @content_for_layout %>
+
+        <div class="footer">
+          <%= GTEH_("views.misc.copyright") %>
+        </div>
+
+      </div>
+
+
+  </body>
+</html>

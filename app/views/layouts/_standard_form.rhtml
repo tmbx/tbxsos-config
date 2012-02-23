@@ -1,0 +1,95 @@
+<!--  get the form title (main fieldset legend) -->
+<%
+  if ! defined?(optgroup) || ( defined?(optgroup) &&  optgroup.nil? )
+    optgroup = @optgroup
+  end
+
+  if @fw.forms[optgroup].nil?
+    raise optgroup
+  end
+  tmptitle = @fw.forms[optgroup].descr
+  if defined?(formtitle) && ! formtitle.nil?
+    tmptitle = formtitle
+  end
+
+  if ! defined?(anchor)
+    anchor = nil
+  end
+
+  if ! defined?(multipart)
+    multipart = false
+  end
+
+  if ! defined?(save_string) || save_string.nil?
+    save_string = GTEH_("misc.forms.save")
+  end
+
+  @tablerows = 3
+  %>
+
+
+
+
+  <!-- BEGIN FORM -->
+  <% if !@fw.forms[optgroup].fields.empty? 
+    form_tag(url_for(:controller => controller, :action => action, :anchor => anchor, :params => @form_params), :multipart => multipart, :id => "foid_#{optgroup}") do %>
+    <%= render :partial => 'layouts/standard_form_start', :locals => {:fo => @fw.forms[optgroup], :formtitle => tmptitle} %>
+
+
+    <!-- EACH HIDDEN FIELD -->
+    <%
+      fo = @fw.forms[optgroup]
+      fo.each_field do |fi|
+        if fi.type == "hidden"
+
+          %>
+    <input type="hidden" name="<%= fi.ident_tag %>" value="<%= fi.value %>" />
+  <%
+  end
+end
+%>
+  
+
+  <!-- EACH NORMAL FIELD -->
+  <%
+    fo = @fw.forms[optgroup] 
+    fo.each_field do |fi|
+      if fi.type != "hidden" && fi.type != "fake"
+        if fo.per_field_action == true
+          %>
+  <%= render :partial => 'layouts/standard_field_per_field_action', :locals => {:fo => fo, :optgroup => optgroup, :fi => fi} %>
+<%
+elsif ! fi.field_template.nil?
+  %>
+  <%= render :partial => fi.field_template, :locals => {:fo => fo, :fi => fi} %>
+  <%
+  else
+    %>
+  <%= render :partial => 'layouts/standard_field', :locals => {:fo => fo, :optgroup => optgroup, :fi => fi} %>
+<%
+      end
+    end
+  end
+%>
+
+
+<!-- FORM BUTTONS -->
+<%
+  if fo.per_field_action.nil?
+%>
+<%= render :partial => 'layouts/standard_form_save', :locals => {:save_string => save_string} %>
+<%
+  end
+%>
+
+<!-- CLOSING FORM -->
+      <%= render :partial => 'layouts/standard_form_stop', :locals => {:optgroup => optgroup} %>
+<% end
+end %>
+
+<!-- BACK LINK IF PRESENT -->
+<% if ! @backlink_params.nil? %>
+<p class="back_link"><%= link_to  GT_("misc.forms.back_link"), @backlink_params %></p>
+<% end %>
+
+

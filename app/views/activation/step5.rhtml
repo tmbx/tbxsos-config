@@ -1,0 +1,16 @@
+<h3><%= GTEH_("views.activation.step5.title") %></h3>
+
+<div class="doc"><%= GTEH_("views.activation.step5.doc") %></div>
+
+<% form_tag({:action=> 'step5_post'}, :multipart => true) do %>
+  <%= GTEH_("views.activation.step5.path_to_file") %><input type="file" name="kap_data" style="width: 25em" />
+  <br /><br />
+  <input type="submit" name="cancel_activation" value='<%= GTEH_("views.activation.misc.cancel_activation") %>' />
+  <input type="submit" name="previous_step" value='<%= GTEH_("views.activation.misc.previous") %>' />
+  <%= submit_tag GT_("views.activation.step5.activate") %>
+  <%= hidden_field_tag :act_name, @act_name %>
+<% end %>
+
+<% if @act_name != "main" %>
+  <%= link_to "Back to dashboard", {:action => 'list', :controller => 'info'} %>
+<% end %>

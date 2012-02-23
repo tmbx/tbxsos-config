@@ -1,0 +1,21 @@
+
+div.stats div.menu { margin: 1.5em 0 1.5em 0; }
+div.stats div.graph_desc { font-weight: bold; margin-bottom: 0.3em; }
+
+div.stats img { margin-bottom: 1.5em; }
+
+
+table.stats {  border-spacing: 0px; margin-bottom: 1.5em; }
+table.stats td { border: 1px solid black;  border-spacing: 0px; vertical-align: middle; padding: 0.05em; }
+
+table.stats td.bigtitle { text-align: center; font-size: 95%; text-transform: capitalize; font-weight: bold; }
+table.stats td.coltitle1 { font-weight: bold; font-size: 90%; text-transform: capitalize; text-align: center; }
+table.stats td.coltitle2 { font-weight: bold; font-size: 85%; text-transform: capitalize; text-align: center; }
+
+table.stats td.leftcol { font-weight: bold; font-size: 70%; text-transform: capitalize; }
+table.stats td.leftcolall { font-weight: bold; font-size: 70%; text-transform: capitalize; }
+table.stats td.all, table.stats td.week { font-weight: bold; }
+
+table.stats td.bigtitle, table.stats td.coltitle1, table.stats td.coltitle2, table.stats td.leftcol, table.stats td.all, table.stats td.week { background-color: #EEEEEE; }
+table.stats td.cell { font-size: 70%; text-align: right; padding: 0.1em; }
+

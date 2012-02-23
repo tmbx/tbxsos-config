@@ -1,0 +1,115 @@
+<% ### FIELD INPUT ### %>
+<%
+    # add standard tags
+    stdtags = ""
+    stdtags += " id=\"#{fi.id}\""               # id is always present
+    stdtags += " name=\"#{fi.ident_tag}\""
+    stdtags += " size=\"#{fi.size}\""           if ! fi.size.nil?
+    stdtags += " class=\"#{fi.input_class}\""   if ! fi.input_class.nil?
+    stdtags += " rows=\"#{fi.rows}\""           if ! fi.rows.nil?
+    stdtags += " cols=\"#{fi.cols}\""           if ! fi.cols.nil?
+
+    # add other tags
+    fi.tags.each_key do |tmpkey|
+      stdtags += " #{tmpkey}=\"#{fi.tags[tmpkey]}\"";
+    end
+
+    # if checkbox
+    if fi.type == "checkbox"
+      stdtags += " value=\"1\" onClick='if (formUpdate) { formUpdate(\"foid_#{optgroup}\");}'"
+      if val == true
+        stdtags += " checked"
+      end
+    end
+
+    stdtags += " disabled"                      if fi.disabled
+%>
+
+<%
+  if ! fi.field_input_template.nil?
+%>
+  <%= render :partial => fi.field_input_template, :locals => {:fi => fi} %>
+<%
+  elsif fi.type == "text" || fi.type == "password"
+%>
+<!-- INPUT (TEXT OR PASSWORD) -->
+<input type="<%= fi.type %>"<%= stdtags %> value="<%= val %>" />
+<%
+  elsif fi.type == "textarea"
+%>
+<!-- TEXTAREA -->
+<textarea <%= stdtags %>><%= val %></textarea>
+<%
+  elsif fi.type == "file"
+%>
+<!-- FILE UPLOAD -->
+<input type="file"<%= stdtags %> />
+<%
+  elsif fi.type == "checkbox"
+%>
+<!-- CHECKBOX - CHECKED -->
+<input type="checkbox"<%= stdtags %> />
+<%
+  elsif fi.type == "select"
+%>
+<!-- SELECT -->
+<select <%= stdtags %>>
+<%
+  already_selected = false
+  fi.choices.each do |c|
+    sel = ""
+    if not already_selected and fi.value.to_s == c["key"].to_s
+      sel = " selected"
+      already_selected = true
+    end
+%>
+<option value="<%= c["key"] %>"<%= sel %>><%= c["value"] %></option>
+<%
+  end
+%>
+</select>
+<%
+  elsif fi.type == "radio" && fi.realtype == "multiline"
+%>
+<!-- RADIO  - MULTILINE -->
+<table>
+<%
+    fi.choices.each do |c|
+      checkedstr = ""
+      if c["key"].to_s == fi.value.to_s
+        checkedstr = " checked='checked'"
+      end
+%>
+<tr>
+<td>
+  <div class="field_radio_button">
+    <input type="radio"<%= stdtags %> value="<%= c["key"] %>"<%= checkedstr %> />
+  </div>
+</td>
+<td><div class="field_radio_label"><%= c["value"] %></div></td>
+</tr>
+<%
+    end
+%>
+</table>
+<%
+  else
+%>
+<!--
+<% ### UNIMPLEMENTED FIELD ### %>
+This field isn't implemented yet.
+-->
+<%
+  end
+%>
+<!-- AUTOFOCUS -->
+<% if fi.autofocus %>
+<script type="text/javascript">
+if (formHelpGetElementById("<%= fi.id %>"))
+{
+  formHelpGetElementById("<%= fi.id %>").focus();
+}
+</script>
+<% end %>
+
+

@@ -1,0 +1,19 @@
+#!/usr/bin/perl
+
+use Debconf::Client::ConfModule;
+use strict;
+
+if (scalar(@ARGV) < 3) {
+  die "Usage: debconf-fset <key> <flag> <flag value>";
+} else {
+  my $key = $ARGV[0];
+  my $flag = $ARGV[1];
+  my $value = $ARGV[2];
+  my $status = Debconf::Client::ConfModule::fset($key, $flag, $value);
+
+  if ($status ne 'true') {
+    die "Could not set debconf flag $flag of key $key to $value. (Status: $status)\n";
+  }
+}
+
+exit 0;

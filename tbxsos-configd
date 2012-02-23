@@ -1,0 +1,544 @@
+#!/usr/bin/ruby
+# Copyright (C) 2007-2012 Opersys inc., All rights reserved.
+# -*- mode: ruby; indent-tabs-mode: t; ruby-indent-level: 2; tab-width: 2 -*-
+
+require 'socket'
+require 'etc'
+require 'syslog'
+require 'fileutils'
+
+# Include your application configuration below
+def in_dev?
+  return (! ENV.nil? && ! ENV['RAILS_ENV'].nil? && ENV['RAILS_ENV'] == "development")
+end
+
+if in_dev?
+    REBOOT_CMD = "/home/mmartin/scripts/fake_reboot.py"
+else
+    REBOOT_CMD = "/sbin/shutdown -r now"
+end
+
+# BIG FUCKING FIXME:
+#
+# This daemon is a big pile-o-junk.  It needs to be rewritten from
+# scratch, not just refactored.  I want for the next version that all
+# priviledged actions to be taken by the web configuration interface
+# be done by this daemon, INCLUDING configuration file access.
+#
+# I imagine a special client process in the same style as kctl could
+# help us talk to the configutation daemon.  Imagine this:
+#
+# kcfg get_config "server.port" => 443
+# kcfg set_config "server.port" 443 => ok
+# kcfg rehash_or_restart
+# etc.
+# 
+# It could be really useful to have all those high-level tasks when
+# working on the TBXSOS.
+
+# Check if there is a /var/www.  This is the only way to know in we
+# are in production mode.  
+
+# FIXME: Pretty ugly hack.  We should have a package that include
+# libraries that are common to the Rails app and to the configuration
+# daemon.
+if FileTest.exists?("/usr/share/tbxsos-config") 
+  add_paths = ["/usr/share/tbxsos-config/www/lib", 
+               "/usr/share/tbxsos-config/www/app/models",
+               "/usr/share/tbxsos-config/www/config/environments"]
+else
+  add_paths = ["app/models", "lib", "config/environments" ]
+end
+  
+add_paths.each do |p| 
+  $LOAD_PATH.push(p)
+end
+
+require 'database_info'
+require 'config_options'
+require 'common_conf'
+require 'pipe_exec'
+require 'pipe_result'
+require 'klogger'
+require 'safeexec'
+
+# Return the PID of the server or nil if the PID file in the options
+# cannot be found.
+def get_tbxsosd_pid opts
+  pid_file = opts.get("server.pid_file")
+
+  if FileTest.exists?(pid_file)
+    f = File.open pid_file, 'r'
+    lines = f.readlines
+    pid = lines[0].to_i
+    f.close
+    return pid
+  end
+
+  return nil
+end
+
+# Check if there is a tbxsosd at the PID we found.
+def check_tbxsosd_alive opts
+  pid = get_tbxsosd_pid opts
+  
+  if pid
+    # Check if the PID we found is tbxsosd
+    if FileTest.exists?("/proc/#{pid}/cmdline")
+      f = File.open "/proc/#{pid}/cmdline", 'r'
+      cmdline = f.readline
+      f.close
+
+      if cmdline =~ /tbxsosd/
+        return true
+      end
+    end
+  end
+
+  return false
+end
+
+# This try to restart the server.
+def restart opts
+  # If the server is alive we stop it.
+  if check_tbxsosd_alive(opts)
+    system ENV['TBXSOSD_STOP']
+    sleep 2
+  end
+
+  # Call the init script and wait a second.  It should not be very
+  # long.
+  pid = fork do
+    exec ENV['TBXSOSD_START']
+  end
+
+  begin
+    Process.wait(pid, Process::WNOHANG)
+  rescue SystemError => ex
+  end
+
+  sleep 1
+
+  # If $? was set by Process.wait, that means tbxsosd just died.
+  if $?
+    return false
+  end
+
+  # Otherwise, check if it is registered in /proc/#{pid}.
+  return check_tbxsosd_alive(opts)
+end
+
+# This sends a HUP signal to the server.
+def rehash opts
+  pid = get_tbxsosd_pid opts
+
+  # Check if we can get the PID and if the server is alive.
+  if pid and check_tbxsosd_alive(opts)
+    Process.kill('SIGHUP', pid)
+    sleep 1
+    return check_tbxsosd_alive(opts)
+  end
+
+  return false
+end
+
+# This function first try a rehash, then try to restart the server if.
+def rehash_or_restart
+  opts = ConfigOptions.new
+
+  if !rehash(opts)
+    $log.info "failed rehash, trying restart"
+
+    if !restart(opts)
+      $log.info "failed restart, bailing out"
+      return false
+    else
+      $log.info "restart successful"
+      return true
+    end
+  else
+    $log.info "rehash successful"
+    return true
+  end
+end
+
+def clean_sockets
+  if FileTest.exists?($cmd_sock_name)
+    File.unlink $cmd_sock_name
+  end
+end
+
+# Calls apt-bundle on a bundle file.
+def bundle(cmd, file_path) 
+  $in_update = true
+
+  if cmd == "bundle_install"
+    action = "install"
+  elsif cmd == "bundle_update"
+    action = "dist-upgrade"
+  end     
+
+  $log.info "calling apt-bundle on #{file_path}"
+
+  # run program
+  begin
+    p = KPopen3.new("apt-noninteractive.sh", "apt-bundle", action, file_path)
+    pin, pout, perr = p.pipes
+    pin.close # Nothing to send through STDIN.
+    sout, serr = SafeExec.empty_pipes([pout, perr])
+  ensure
+    p.close
+  end
+
+  sout.split("\n").each do |l|
+    $log.info "update stdout: %s" % l
+  end
+  serr.split("\n").each do |l|
+    $log.info "update stderr: %s" % l
+  end
+
+  $in_update = false
+
+  # Check the return value.
+  if $? != 0
+    $log.info "apt-bundle failed, exit status #{pipe_result.status}."
+    return false
+  end
+
+  $log.info "done calling apt-bundle"
+  return true
+end
+
+# Restore
+def convert_kps_backup(restore_file)
+  cmd = "/bin/sh -c \"tbxsos_convert -i #{restore_file} -o - | tbxsos_import -i -\""
+  
+  begin
+    $log.info "attempting backup conversion."
+    proc = SafeExec.exec(cmd, returnout = false)
+  rescue SafeExecException => ex
+    $log.error e
+    $log.error "restoration failed."
+    return false
+  end
+
+  $log.info "restoration succeeded."
+  return true
+end
+
+def ssl_key_switch(key_path, cert_path) 
+  $log.info "copying keys to /etc/teambox/base"
+
+  # Should probably be defined somewhere public.
+  base_key_path = "/etc/teambox/base/cert_key.key"
+  base_cert_path = "/etc/teambox/base/cert.pem"
+  
+  # Copy the SSL keys to the Teambox SSL directory.
+  FileUtils.copy(key_path, base_key_path)
+  FileUtils.copy(cert_path, base_cert_path)
+
+  # Reload Apache and all other Teambox services
+  begin
+    $log.info "apache2 reloading."
+    system("/etc/init.d/apache2 reload")
+  rescue
+    $log.info "apache2 reload failed."
+  end
+  begin
+    $log.info "kplatshell reloading."
+    system("kplatshell restart-services")
+  rescue
+    $log.info "kplatshell restart-services failed."
+  end
+
+  return true
+end
+
+# Search for the update file somewhere.  We look in dmesg, starting by
+# the end of the output
+def wait_update
+  # Wait on a UNIX socket called /tmp/teambox-update.  If for some
+  # reason, we cannot, that may be because the daemon has crashed, we
+  # then have to cleanup the place and retry.  If that fails, then we
+  # a screwed and bail out.
+  begin
+    cmd_sock = UNIXServer.open($cmd_sock_name)
+  rescue Exception => ex
+    clean_sockets
+
+    # If this crashes, then the interpreter will jump out.
+    cmd_sock = UNIXServer.open($cmd_sock_name)
+  end
+
+  # Change UID of the socket.
+  if ARGV[0]
+    username = ARGV[0]
+  else
+    username = 'www-data'
+  end
+
+  pwent = Etc.getpwnam(username)
+  uid = pwent.uid
+  gid = pwent.gid
+  File.chown(uid, gid, $cmd_sock_name)
+
+  # Select on socket.
+  while true
+    begin
+      arr = select([cmd_sock])
+      sock = nil
+
+      arr[0].each do |listen_sock|
+        sock = listen_sock.accept
+        cmd = sock.readline.strip
+
+        $log.info "accepted client connection"
+
+        case cmd
+        when "timezone"
+          tz = sock.readline.strip
+          $log.info "setting timezone to #{tz}"
+          begin
+            File.open("/etc/timezone", "w") do |f|
+              f.print("#{tz}\n")
+            end
+            system("dpkg-reconfigure -fnoninteractive -pcritical tzdata")
+            if $? == 0
+              sock.print "ok\n"
+            else
+              sock.print "failed\n"
+            end
+          rescue Exception => ex
+            raise ex if $debug
+            sock.print "failed\n"
+          end
+
+        when "convert_kps_backup"
+          backup_file = sock.readline.strip
+          $log.info "received convert_kps_backup command (file #{backup_file})"
+
+          begin
+            res = convert_kps_backup(backup_file)
+            if res
+              sock.print "ok\n"
+            else
+              sock.print "failed\n"
+            end
+          rescue Exception => ex
+            raise ex if $debug
+            sock.print "failed\n"
+          end
+
+          # Setting date
+        when "date"
+          year = sock.readline.strip.to_i
+          month = sock.readline.strip.to_i
+          day = sock.readline.strip.to_i
+          fyear = "%02d" % year
+          fmonth = "%02d" % month
+          fday = "%02d" % day
+          $log.info "setting date to #{fyear}/#{fmonth}/#{fday}"
+          begin
+            system "date --set=\"#{fyear}#{fmonth}#{fday}\" > /dev/null"
+            if $? == 0
+              sock.print "ok\n"
+            else
+              sock.print "failed\n"
+            end
+          rescue Exception => ex
+            raise ex if $debug
+            sock.print "failed\n"
+          end
+
+          # Setting time
+        when "time"
+          hour = sock.readline.strip.to_i
+          min = sock.readline.strip.to_i
+          sec = sock.readline.strip.to_i
+          fhour = "%02d" % hour
+          fmin = "%02d" % min
+          fsec = "%02d" % sec
+          $log.info "setting time to #{fhour}:#{fmin}:#{fsec}"
+          begin
+            system "date --set=\"#{fhour}:#{fmin}:#{fsec}\" > /dev/null"
+            if $? == 0
+              sock.print "ok\n"
+            else
+              sock.print "failed\n"
+            end
+          rescue Exception => ex
+            raise ex if $debug
+            sock.print "failed\n"
+          end
+
+        when "reboot"
+          $log.info "rebooting"
+          begin
+            system(REBOOT_CMD)
+            if $? == 0
+              sock.print "ok\n";
+            else
+              sock.print "failed\n"
+            end
+          rescue Exception => ex
+            raise ex if $debug
+            sock.print "failed\n"
+          end
+          
+          # SSL key switch
+        when "ssl_key_switch"
+          $log.info "received key switch command"
+          key_file = sock.readline.strip
+          cert_file = sock.readline.strip
+          
+          begin
+            if ssl_key_switch(key_file, cert_file)
+              sock.print "ok\n"
+            else
+              sock.print "failed\n"
+            end
+          rescue Exception => ex
+            raise ex if $debug
+            sock.print "failed\n"
+          end
+
+          # Bundle update
+        when /bundle_install|bundle_update/
+          $log.info "received bundle action command"
+          file = sock.readline.strip
+          pid = Process.fork do
+            err = 1
+            begin
+              if bundle(cmd, file)
+                sock.print "ok\n"
+                err = 0
+              else
+                sock.print "failed\n"
+              end
+            rescue Exception => ex
+              $log.info "%s" % ex.to_s
+              ex.backtrace.each { |l| $log.info "%s" % l }
+              sock.print "failed\n"
+            ensure
+              sock.close_write
+              sock.close_read
+
+              Process.exit!(err)
+            end
+          end
+
+          $log.info "bundle action launched"
+          Process.waitpid(pid, 0)
+
+          if $?.exitstatus != 0 or $?.termsig
+            $log.info "bundle action finished with an error code."
+          else
+            $log.info "bundle action finished successfully."
+          end         
+
+        when "rehash"
+          $log.info "received rehash command"
+          
+          begin
+            if rehash_or_restart
+              sock.print "ok\n"
+            else
+              sock.print "failed\n"
+            end
+          rescue Exception => ex
+            raise ex if $debug
+            sock.print "failed\n"
+          end
+
+        else
+          $log.info "unknown command #{cmd}"
+        end
+
+        # Close the socket.
+        sock.close if !sock.closed?
+      end
+
+    rescue Exception => ex
+      # Bail out on any error.
+      #  I don't understand but this statement won't work.
+      $log = Klogger.new('tbxsos-configd')
+      $log.info "exception: %s" % ex.to_s
+
+      if sock and !sock.closed?
+        sock.close
+      end
+
+      # Reraise the exception.
+      raise ex if $debug
+    end
+  end
+
+  if !cmd_sock.closed?
+    cmd_sock.close
+  end
+end
+
+def main
+  # Traps SIGTERM.  Cleans the place.
+  Signal.trap("TERM") do
+    # If we receive a TERM while the update procedure is running, we
+    # have to quit, but we need to make sure we don't erase the socket
+    # under the update process nose.  That wouldn't be good.
+    if !$in_update
+      clean_sockets
+    end
+
+    $log = Klogger.new('tbxsos-configd')
+    $log.info 'received TERM'
+
+    exit! 0
+  end
+
+  $log = Klogger.new('tbxsos-configd')
+  $log.info 'updater daemon started'
+  wait_update
+  clean_sockets
+
+  exit! 0
+end
+
+if !ENV['TBXSOSD_START']
+  ENV['TBXSOSD_START'] = "/bin/sh -c '(cd /home/fdgonthier/repos/tbxsosd && ./tbxsosd -d)'"
+end
+if !ENV['TBXSOSD_STOP']
+  ENV['TBXSOSD_STOP'] = 'killall tbxsosdd'
+end
+
+$cmd_sock_name = '/tmp/tbxsos-configd-cmd'
+$in_update = false
+$debug = false
+
+ARGV.each do |arg|
+  if arg == '--debug'
+    $debug = true
+    ARGV.delete arg
+  end
+end
+
+if !$debug
+  begin
+    pid = fork do
+      # Make sure we are no longer attached to the tty.
+      Process.setsid
+      STDIN.reopen "/dev/null"
+      STDOUT.reopen "/dev/null"
+      STDERR.reopen STDOUT
+      main
+    end
+    f = File.open('/var/run/tbxsos-configd.pid', 'w')
+    f.print "#{pid}\n"
+    f.close
+  rescue Exception => ex
+    print ex
+  end
+else
+  main
+  pid = Process.pid
+end
+
+exit! 0

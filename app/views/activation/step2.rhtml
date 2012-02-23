@@ -1,0 +1,26 @@
+<h3><%= GTEH_("views.activation.step2.title") %></h3>
+
+<div class="doc"><%= GTEH_("views.activation.step2.doc") %></div>
+
+<div>
+<% form_tag({:action => 'step2_download_csr'}) do %>
+  <%= submit_tag GT_("views.activation.step2.download_pem") %>
+<% end %>
+</div>
+
+<div class="step2_csr">
+ <pre><%= @csr %></pre>
+</div>
+
+<br />
+
+<% form_tag({:action=> 'step2_post'}) do %>
+  <input type="submit" name="cancel_activation" value='<%= GTEH_("views.activation.misc.cancel_activation") %>' />
+  <input type="submit" name="previous_step" value='<%= GTEH_("views.activation.misc.previous") %>' />
+  <%= submit_tag GT_("views.activation.misc.next") %>
+  <%= hidden_field_tag :act_name, @act_name %>
+<% end %>
+
+<% if @act_name != "main" %>
+<%= link_to "Back to dashboard", {:action => 'list', :controller => 'info'} %>
+<% end %>

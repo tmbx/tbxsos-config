@@ -1,0 +1,10 @@
+<h2><%= @page_title %></h2>
+
+
+
+<%= render :partial => 'org_help' %>
+
+<%= render :partial => 'layouts/standard_form', :locals => {:controller => "organizations", :action => "update", :id => @org} %>
+
+<%= link_to GT_("views.organizations.edit.link_to.back"), {:action => 'list'}, {:class => "back_link"} %>
+

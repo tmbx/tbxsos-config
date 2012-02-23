@@ -1,0 +1,310 @@
+#!/usr/bin/env ruby
+# -*- mode: ruby; indent-tabs-mode: t; ruby-indent-level: 2; tab-width: 2 -*-
+
+# standard
+require 'stringio'
+
+#p ENV
+
+# tell ruby where to look for custom libraries
+add_paths = ["config", "lib", "app/models", "config/environments"]
+add_path_base = "/usr/share/tbxsos-config/www"
+if ! ENV["KCONFIG_PATH"].nil?
+	add_path_base = ENV["KCONFIG_PATH"]
+end
+add_paths.each do |path|
+	# print "custom import path: " + add_path_base + "/" + path + "\n"
+	$LOAD_PATH.push(add_path_base + "/" + path)
+end
+
+
+EXIT_OK=0
+EXIT_FAILED=1
+
+# import custom libraries
+begin
+	# treat separately because this is a generated file
+	require 'common_conf'
+rescue LoadError
+	print "Could not import tbxsos-config module 'common_conf'...\n"
+	print "perhaps you should define the KCONFIG_PATH environment variable.\n"
+	exit EXIT_FAILED
+end
+begin
+	require 'environment'
+	require 'klogger'
+	require 'config_options'
+	require 'activator'
+	require 'cparser'
+	require 'tbxsosd_configd'
+rescue LoadError
+	print "Could not import tbxsos-config modules...\n"
+	print "perhaps you should define the KCONFIG_PATH environment variable.\n"
+	exit EXIT_FAILED
+end
+
+# needed for config_options
+require 'gettext_wrap'
+
+# test config for kar creation
+test_config = "
+# default config
+[main]
+admin_name=Admin name
+admin_email=admin@test.com
+[csr]
+country=CA
+state=QC
+location=Sherbrooke
+org=Opersys inc.
+org_unit=TBX Hosting
+domain=teambox.co
+email=support@teambox.co
+"
+
+
+#dispatch_info = [
+#	[ "get_new_id_act", [], ["id"], "create an identity and get activation id" ],
+#	[ "get_kar_act", ["conf"], ["kar"], "generate kar" ],
+#	[ "set_kap_act", ["kap"], [], "set kap file" ]
+#	]
+
+### not worth it ###
+### NOT USED ###
+def dispatch(dispatch_info, prog, argv)
+	# 
+	dispatch_info.each do |info|
+		if argv[0] == info[0] && argv.length == (1 + info[1].length + info[2].length)
+			i = 1
+			p info
+			in_params = []
+			info[1].each do |param|
+				in_params.push(read_file(argv[i]))
+				i += 1
+			end
+
+			#out_params = 
+
+			#p in_params
+
+			#info[2].each do |param|
+			#	p argv[i]
+			#	i += 1
+			#end
+
+			return 6
+		end
+	end
+
+	# print usage information
+	print "Usage:\n"
+	dispatch_info.each do |info|
+		line = "       #{prog} #{info[0]}"
+		info[1].each do |param|
+			line = line + " <in_#{param}_file>"
+		end
+		info[2].each do |param|
+			line = line + " <out_#{param}_file>"
+		end
+		line = "%-70s" % line
+		print line+"# #{info[3]}\n"
+	end
+	print "\n"
+	return 1
+end
+
+def read_file(file)
+	begin
+		f = open(file, "r")
+		param = f.read()
+		f.close()
+		return param
+	rescue Exception => ex
+		return nil
+	end
+end
+
+def write_file(file, data)
+	begin
+		f = open(file, "w")
+		f.write(data)
+		f.close()
+		return true
+	rescue Exception => ex
+		return false
+	end
+end
+
+
+# init activator module
+def init_activator()
+	begin
+		Activator.basedir = TEAMBOX_ACT_DIR
+		Activator.teambox_ssl_cert_path = TEAMBOX_SSL_CERT
+		Activator.teambox_sig_pkey_path = ACT_SIG_PKEY_PATH
+		Activator.initialize_static
+		Bundle.archive_dir = File.join(TEAMBOX_ACT_DIR, "archive_bundle")
+
+	rescue Exception => ex
+		p ex.to_s
+		exit EXIT_FAILED
+
+	end
+end					
+
+
+# create a new identity, return the id
+def get_new_id_act()
+	init_activator()
+
+	begin
+		activator = Activator.create_new("main", "main")
+		activator.save()
+		return activator.id_name
+	
+	rescue Exception => ex
+		p ex.to_s
+		exit EXIT_FAILED
+
+	end
+end
+
+
+def get_kar_act(id, conf_file)
+	init_activator()
+
+	begin
+		config = CParser.new(conf_file) # ini style
+
+		# load activator
+		activator = Activator.load_existing(id)
+
+		# get kar
+		activator.admin_name = config.get_value("main", "admin_name")
+		activator.admin_email = config.get_value("main", "admin_email")
+		activator.country = config.get_value("csr", "country")
+		activator.state = config.get_value("csr", "state")
+		activator.location = config.get_value("csr", "location")
+		activator.org = config.get_value("csr", "org")
+		activator.org_unit = config.get_value("csr", "org_unit")
+		activator.domain = config.get_value("csr", "domain")
+		activator.email = config.get_value("csr", "email")
+		kar = activator.get_kar()
+		activator.save()
+		return kar
+
+	rescue Exception => ex
+		p ex.to_s
+		exit EXIT_FAILED
+
+	end
+end
+
+
+def add_group(org_id, group_name)
+	init_activator()
+
+	begin
+
+	    profile = Profil.new
+	    profile.group = GroupProfil.new
+	    profile.organization = Organization.find(org_id)
+
+	    profile.group.group_name = group_name
+	    profile.key_id = Org.get_first_key_id(org_id)
+	    profile.prof_type = 'G'
+	    profile.group.status = 'A'
+
+	    profile.save
+	    profile.group.save
+
+	    # Once the group profile and root profile are saved, we need to
+	    # set the user ID in the profile otherwise it just won't be set.
+	    profile.group_id = profile.group.group_id
+	    profile.save
+
+		return profile.group_id
+
+	rescue Exception => ex
+		p ex.to_s
+		exit EXIT_FAILED
+
+	end
+end
+
+
+def set_kap_act(id, kapstr)
+	init_activator()
+
+	print id + "\n"
+
+	begin
+		activator = Activator.load_existing(id)
+		p activator
+		activator.use_kap(kap_str=kapstr, install_bundle=false, kaptype="other")
+		activator.save()
+
+	rescue Exception => ex
+		p ex.to_s
+		exit EXIT_FAILED
+
+	end
+end
+
+if ARGV[0] == "get_new_id_act" && ARGV.length == 2
+
+	##### NEW IDENTITY #####
+	id_out_file = ARGV[1]
+	id = get_new_id_act()
+	write_file(id_out_file, id)
+	exit EXIT_OK
+
+elsif ARGV[0] == "get_kar_act" && ARGV.length == 4
+
+	##### GENERATE KAR ON IDENTITY #####
+	id = ARGV[1]
+	conf_file = ARGV[2]
+	out_kar_file = ARGV[3]
+	kar = get_kar_act(id, conf_file)
+	write_file(out_kar_file, kar)
+	exit EXIT_OK
+
+elsif ARGV[0] == "set_kap_act" && ARGV.length == 3
+
+	##### ACTIVATE KAP #####
+	id = ARGV[1]
+	kapstr= read_file(ARGV[2])
+	set_kap_act(id, kapstr)
+	exit EXIT_OK
+
+elsif ARGV[0] == "add_group" && ARGV.length == 4
+
+	##### ADD GROUP #####
+	
+	org_id = ARGV[1]
+	group_name = ARGV[2]
+	out_gid_file = ARGV[3]
+
+	group_id = add_group(org_id, group_name)
+
+	write_file(out_gid_file, group_id.to_s)
+
+	exit EXIT_OK
+
+else
+
+	##### USAGE #####
+	print "Usage:\n"
+	print "        #{$0} get_new_id_act <id_out_file>                     # create an identity and get activation id\n"
+	print "        #{$0} get_kar_act <id> <conf_file> <out_kar_file>      # generate kar\n"
+	print "        #{$0} set_kap_act <id> <kap>                           # set kap file\n"
+	print "        #{$0} add_group <org_id> <group_name> <out_gid_file>   # add group to org\n"
+	print "\n"
+	exit EXIT_FAILED
+
+end
+
+# fallthrough (should not happen)
+print "What the..."
+exit EXIT_FAILED
+

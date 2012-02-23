@@ -1,0 +1,14 @@
+<h2><%= @page_title %></h2>
+
+<div class="doc"><%= GTEH_("views.keys.list.doc") % '<a href="mailto:keys@teambox.co">keys@teambox.co</a>' %></div>
+
+<% @keys.each do |k| %>
+<h4><%= k.owner_name %> (<%= k.key_id %>)</h4>
+
+<pre>
+--- START ENCRYPTION PUBLIC KEY ---
+<%= k.key_id %>
+<%= k.owner_name %>
+<%= forcibly_word_wrap(k.enc_pkey.key_data, 70) %>--- END ENCRYPTION PUBLIC KEY ---
+</pre>
+<% end %>

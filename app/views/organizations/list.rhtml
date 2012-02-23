@@ -1,0 +1,123 @@
+<h2><%= @page_title %></h2>
+
+<div class="doc"><%= GTEH_("views.organizations.list.doc") %></div>
+
+<%= 
+  if @can_create_orgs == true
+    link_to GT_("views.organizations.list.link_to.add_org"), :action => 'new'
+  end
+%>
+
+<!-- Start of organization loop -->
+<% 
+  @count = 0
+  if @orgs
+    @orgs.each do |o|
+      @count += 1
+      if @count > 1
+%>
+<hr class="org_sep" />
+<%
+      end
+%>
+<h4><%= GTEH_("forms.organization.org_name_is") %> <%= o.name %></h4>
+<% form_tag({:action => 'upload_kap', :id => o.org_id}, :multipart => true) do %>
+<label for="kap"><%= GTEH_("views.organization.upload_kap.label") %></label>
+<input type="file" name="kap" size="25" />
+<%= submit_tag GT_("views.organization.upload_kap.submit"), :style => "width: 7.2em;" %>
+<% end %>
+
+<div style="text-align: right">
+<%= link_to GT_("views.organizations.list.link_to.edit_org"), { :action => 'edit', :id => o } %>
+<%= 
+  if @can_delete_orgs == true
+    " | " + link_to(GT_("views.organizations.list.link_to.delete_org"), { :action => 'delete', :id => o }, :confirm => "Are you sure?")
+  end
+%>
+<%=
+  if o and not @has_ldap
+    " | " + link_to(GT_("views.organizations.list.link_to.edit_users"), {:action => 'list', :controller => 'users', :org_id => o.org_id})
+  end
+%>
+<%=
+  if o and @has_ldap
+    link_to(GT_("views.organizations.list.link_to.edit_groups"), { :action => 'list', :controller => 'groups', :org_id => o.org_id })
+  end
+%>
+</div>
+
+<br />
+
+<table style="font-size: smaller">
+<tr>
+  <td style="font-weight: bold"><%= GTEH_("forms.organization.org_keys_are") %></td>
+  <td>
+<% if @orgs_keys %>
+<%= @orgs_keys[o.org_id].join(", ") %>
+<% end %>
+  </td>
+</tr>
+<% if @licenses[o.org_id] %>
+<tr>
+  <td style="font-weight: bold">License expiration:</td>
+  <% if @licenses[o.org_id][:best_before_error] %>
+  <td style="color: red"><%= @licenses[o.org_id][:best_before] %></td>
+  <% elsif @licenses[o.org_id][:best_before_warn] %>
+  <td style="color: yellow"><%= @licenses[o.org_id][:best_before] %></td>
+  <% else %>
+  <td><%= @licenses[o.org_id][:best_before] %></td>
+  <% end %>
+</tr>
+<% else %>
+<tr>
+  <td colspan="2">No license for this organization.</td>
+</tr>
+<% end %>
+</table>
+
+<% if @show_users %>
+
+<h5><%= GTEH_("forms.organization.users_are") %>
+<% @anchors[o.org_id].each do |f| %>
+<a href="#<%= o.org_id.to_s + f[0].to_s %>"><%= f %></a>
+<% end %>
+</h5>
+<% if @user_profiles[o.org_id].length > 0 %>
+<table>
+  <% last_anchor = nil 
+     current_anchor = nil %>
+  <% @user_profiles[o.org_id].each do |p| %>
+  <% current_anchor = "#{o.org_id}#{p.user.first_name[0].to_s}" %>
+  <tr>
+    <td>
+      <% if current_anchor != last_anchor %>
+      <a name="<%= current_anchor %>" />
+      <% last_anchor = current_anchor %>
+      <% end %>
+      <%= "#{p.user.first_name} #{p.user.last_name} (#{p.user.primary_email.email_address})" %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<!-- End of user loop. -->
+<% else %>
+  <p><i>No users are configured for this organization</i></p>
+<% end %>
+<% end %>
+
+<% if @show_groups %>
+<h5><%= GTEH_("forms.organization.group_names_are") %></h5>
+  <% if @group_profiles[o.org_id].length > 0 %> 
+<!-- Start of group loop. -->
+     <% @group_profiles[o.org_id].each do |g| %>
+     <li><%= g.group.group_name %></li>
+     <% end
+     else %>
+     <p><i>No groups are configured for this organization</i></p>
+  <% end %>
+<!-- End of group loop. -->
+</ul>
+<% end %>
+
+<% end %>
+<% end %>

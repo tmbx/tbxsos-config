@@ -1,0 +1,40 @@
+<h2><%= @page_title %></h2>
+
+<div class="doc"><%= @page_doc %></div>
+
+<div>
+<% form_tag(:action => "list") do %>
+<input type="submit" name="zip" value="<%= GTEH_("logs.forms.pack.button") %>" />
+<br /><br />
+<hr />
+<br />
+<select name="active_log" onchange="javascript:form.submit()">
+<%   @logs.each do |f| %>
+<%     if f == @active_log %>
+<option value="<%= f %>" selected="selected"><%= f %></option>
+<%     else %>
+<option value="<%= f %>"><%= f %></option>
+<%     end %> <!-- if -->
+<%   end %> <!-- @logs.each -->
+</select>
+
+<input style="width: 8.5em;" type="submit" name="view" value="<%= GTEH_("logs.forms.view.button") %>" />
+<input style="width: 8.5em;" type="submit" name="download" value="<%= GTEH_("logs.forms.download.button") %>" />
+<% end %> <!-- form_tag -->
+</div>
+
+
+<% if not @lines.nil? and @lines.length > 0 %>
+<div class="output">
+<%   @lines.each do |e| %>
+<%     if e[0] == :normal %>
+<%=     CGI.escapeHTML(e[1]) %><br />
+<%     elsif e[0] == :error %>
+<span style="color: red"><%= CGI.escapeHTML(e[1]) %></span><br />
+<%     elsif e[0] == :warning %>
+<span style="color: #FF5F00"><%= CGI.escapeHTML(e[1]) %></span><br />
+<%     end %> <!--  -->
+<%   end %>
+</div>
+<% end %>
+

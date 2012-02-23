@@ -1,0 +1,21 @@
+<%
+  if fi.errors.length > 0
+%>
+<tr>
+<td colspan="3">
+<div class="field_error">
+  <%
+    fi.errors.each do |line|
+  %>
+<p class="field_error_message"><%= line %></p>
+  <%
+    end
+  %>
+</div>
+</td>
+</tr>
+<%
+  end
+%>
+
+

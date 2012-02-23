@@ -1,0 +1,41 @@
+<h2><%= @page_title %></h2>
+
+<%= render :partial => 'layouts/menu_pagetop', :locals => {:menu_id => "pagetop_ldap"} %>
+
+<%= render :partial => 'doc' %>
+
+<%= render :partial => 'org' %>
+
+<table class="list">
+  <tr>
+    <!-- <th>ID</th> -->
+    <th align="left"><%= GTEH_("views.groups.list.division_name") %></th>
+    <th align="left"><%= GTEH_("views.groups.list.group_dn") %></th>
+  </tr>
+  <% for p in @group_profiles %>
+  <tr class="list_line">
+    <% if p.group %>
+    <!-- <td width="*"><%= p.prof_id %></td> -->
+    <td width="*"><%= p.group.group_name %></td>
+    <td>
+    <% if p.group.ldap_groups.length > 0
+       for e in p.group.ldap_groups %>
+    <span style="font-size: x-small"><%= e.group_dn %></span><br />
+    <% end
+       else %>
+    &nbsp;
+    <% end %>
+    </td>
+    <td width="60"><div class="list_edit"><%= link_to GT_("misc.forms.edit"), :action => 'edit', :org_id => @org, :id => p %></div></td>
+    <td width="60"><div class="list_delete"><%= link_to GT_("misc.forms.delete"), {:action => 'delete', :org_id => @org, :id => p}, :confirm => GT_("misc.forms.are_you_sure") %></div></td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+
+<div class="other_action_link">
+<%= link_to GT_("views.groups.list.add_division"), {:action => 'new', :org_id => params[:org_id]} %>
+</div>
+
+<!-- <%= link_to GT_("views.groups.list.back_ldap_setup"), {:action => 'list', :controller => 'ldap_config'}, {:class => "back_link"}  %> -->
+

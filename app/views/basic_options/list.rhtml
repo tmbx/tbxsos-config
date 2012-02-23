@@ -1,0 +1,15 @@
+<h2><%= @page_title -%></h2>
+
+<div class="doc"><%= @page_doc %></div>
+
+<%= render :partial => 'layouts/standard_form', :locals => {:controller => params[:controller], :action => "set"} %>
+
+
+
+<a name="setdate"></a>
+
+<a name="setdatetime"></a>
+
+<%= render :partial => 'layouts/standard_form', :locals => {:controller => params[:controller], :action => "set_datetime",
+  :optgroup => "datetime", :anchor => "setdatetime"} %>
+

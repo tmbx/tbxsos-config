@@ -1,0 +1,73 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
+PKG=debian/tbxsos-config/
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	touch configure-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	dh_clean
+
+	./make_links.sh
+
+build:
+# Rake needs those.
+	rake makemo
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+
+	dh_installdirs
+	dh_install
+
+	mkdir -p debian/tbxsos-config/etc/logrotate.d
+	install -m644 debian/tbxsos-config.logrotate \
+		debian/tbxsos-config/etc/logrotate.d/tbxsos-config
+
+# This is for emergency logfiles created by Apache if fastcgi fails.
+# We don't expose them to the configuration interface but it is
+# important to catch them.
+	mkdir -p debian/tbxsos-config/var/log/teambox/fastcgi
+	chown www-data.www-data debian/tbxsos-config/var/log/teambox/fastcgi
+
+# Rename stock configuration
+	mv $(PKG)/usr/share/tbxsos-config/www/config/environments/production_conf.rb.stock \
+	   $(PKG)/usr/share/tbxsos-config/www/config/environments/common_conf.rb
+	mv $(PKG)/usr/share/tbxsos-config/www/config/environments/production.rb.stock \
+	   $(PKG)/usr/share/tbxsos-config/www/config/environments/production.rb
+
+binary-indep: build install
+	dh_testdir
+	dh_testroot
+	dh_installdocs
+	dh_installinit -ptbxsos-config --name=tbxsos-configd --noscripts
+	dh_installdebconf
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms -X /var/log/teambox/fastcgi
+	dh_makeshlibs
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary-arch:
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

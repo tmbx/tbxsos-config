@@ -1,0 +1,41 @@
+# Path of the KPS configuration files.
+CONF_DIR = "/etc/teambox/tbxsosd/"
+
+# The file the app will try to write.
+CONF_FILE = "web.conf"
+
+# Directory where are the PostgresSQL Unix sockets located.
+DB_DIR = "/var/run/postgresql"
+
+### for options controller ###
+TBXSOSD_CONFIGD_CMD_SOCKET = '/tmp/tbxsos-configd-cmd'
+
+### Error info dump ###
+ERROR_INFO_FILE = "tbxsosd-system-info"
+ERROR_HANDLE = true
+
+ACT_SIG_PKEY_PATH = "/usr/share/teambox-acttools/teambox_kps_email.sig.pkey"
+TEAMBOX_SSL_CERT = "/usr/share/teambox-acttools/teambox_kps_install_cert.pem"
+TEAMBOX_ACT_DIR  = "/etc/teambox/act/"
+
+### for tests controller ###
+TESTS_KPSLOGIN_FILE = "/usr/bin/kpslogin"
+TESTS_PKGMAIL_FILE = "/usr/bin/pkgmail"
+
+TESTS_KPS_USERNAME = ""
+TESTS_KPS_PASSWORD = ""
+TESTS_KPS_HOST = "localhost"
+TESTS_KPS_PORT = ""
+
+TESTS_PKG_TYPE = 0
+TESTS_LICENSE = "no"
+
+# Those needs to be set otherwise the packaging test will fail if
+# forwarding is enabled.
+TESTS_SUBJECT = "Teambox KPS Test"
+TESTS_TO = "to-kps-test@teambox.kps"
+TESTS_CC = "cc-kps-test@teambox.kps"
+
+TESTS_EMAIL_ADDRESS = ""
+TESTS_FULL_NAME = ""
+

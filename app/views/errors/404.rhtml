@@ -1,0 +1,12 @@
+<div id="error_404">
+
+<div class="doc">
+<%= GTEH_("error.404.doc") % params[:path] %>
+</div>
+
+<div>
+<%= link_to GT_("error.404.redirect_to"), url_for(:controller => 'index', :action => 'index') %>
+</div>
+</div>
+
+

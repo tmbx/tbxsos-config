@@ -1,0 +1,25 @@
+<h3><%= GTEH_("views.activation.step4.title") %></h3>
+
+<div class="doc"><%= GTEH_("views.activation.step4.doc") %></div>
+
+<% form_tag({:action => 'step4_download_kar'}, :multipart => true) do %>
+  &nbsp;&nbsp;<%= submit_tag GT_("views.activation.step4.download_kar") %>
+
+  <span class="step4_mail">
+    &nbsp;&nbsp;<%= mail_to "activation@teambox.co", 
+                    "activation@teambox.co", 
+                    :subject => @subject %>
+  </span>
+  <%= hidden_field_tag :act_name, @act_name %>
+<% end %>
+
+<% form_tag({:action=> 'step4_post'}, :multipart => true) do %>
+  <input type="submit" name="cancel_activation" value='<%= GTEH_("views.activation.misc.cancel_activation") %>' />
+  <input type="submit" name="previous_step" value='<%= GTEH_("views.activation.misc.previous") %>' disabled />
+  <%= submit_tag GT_("views.activation.misc.next") %>
+  <%= hidden_field_tag :act_name, @act_name %>
+<% end %>
+
+<% if @act_name != "main" %>
+<%= link_to "Back to dashboard", {:action => 'list', :controller => 'info'} %>
+<% end %>

@@ -1,0 +1,4 @@
+var/log/teambox
+usr/share/tbxsos-config/www
+usr/bin
+etc/teambox/act

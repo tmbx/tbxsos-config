@@ -1,0 +1,2 @@
+module LdapConfigHelper
+end

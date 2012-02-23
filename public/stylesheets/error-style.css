@@ -1,0 +1,8 @@
+.error {
+    background-color: #D3D3D3;
+   /* background-color: lightgray; didn't work with some IE's */ 
+   font-size: 0.7em;
+   margin: 2em 2em 2em 2em;
+   padding: 1em 1em 1em 1em; 
+   font-family: courier;
+}

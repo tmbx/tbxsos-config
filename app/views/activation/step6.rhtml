@@ -1,0 +1,12 @@
+<h3><%= GTEH_("views.activation.step6.title") %></h3>
+
+<div class="doc"><%= GTEH_("views.activation.step6.doc") %></div>
+
+<br /><br />
+<%= hidden_field_tag :act_name, @act_name %>
+<%= link_to GT_("views.activation.step6.go_to_dashboard"), :action => 'list', :controller => 'info' %>
+
+<% if @act_name != "main" %>
+<%= link_to "Back to dashboard", {:action => 'list', :controller => 'info'} %>
+<% end %>
+

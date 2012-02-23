@@ -1,0 +1,13 @@
+Source: tbxsos-config
+Section: teambox
+Priority: optional
+Maintainer: 
+Build-Depends: debhelper (>= 4), openssl (>= 0.9.7), rake, rails (>= 1.1.6), libgettext-ruby1.8
+Standards-Version: 3.7.2
+
+Package: tbxsos-config
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby1.8, ruby, libfcgi-ruby1.8, rails, m4, coreutils (>= 5.97) | coreutils-sha256sum, apt-bundle (>= 0.1), openssl (>= 0.9.7), tbxsosd-common (>= 1.1.99), libpgsql-ruby1.8, libgettext-ruby1.8, rake (>= 0.7), kweb, libapache2-mod-fcgid, tbxsosd-common (>= 1.4), tbxsosd-db, tbxsos-utils, teambox-acttools (>= 10)
+Description: TBXSOS Configuration Interface
+  Friendly user-interface to configure the TBXSOS server
+

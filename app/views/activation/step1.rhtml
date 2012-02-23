@@ -1,0 +1,15 @@
+<!-- First step of KAR registration. -->
+
+<% form_tag(:action => 'step1_post') do %>
+<h3><%= GTEH_("views.activation.step1.title.cert") %></h3>
+
+<%= render :partial => 'csr_input' %>
+
+<input type="submit" name="cancel_activation" value="<%= GTEH_("views.activation.misc.cancel_activation") %>" />
+<%= submit_tag GT_("views.activation.misc.next") %>
+<%= hidden_field_tag :act_name, @act_name %>
+<% end %>
+
+<% if @act_name != "main" %>
+<%= link_to "Back to dashboard", {:action => 'list', :controller => 'info'} %>
+<% end %>

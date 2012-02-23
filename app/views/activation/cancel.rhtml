@@ -1,0 +1,9 @@
+<div class="doc"><%= GTEH_("views.activation.cancel.doc") %></div>
+
+<% form_tag({:action=> 'cancel'}) do %>
+<input type="submit" name="really_cancel" value='<%= GTEH_("views.activation.cancel_activation.yes") %>' />
+<input type="submit" name="no_cancel" value='<%= GTEH_("views.activation.cancel_activation.no") %>' />
+<%= hidden_field_tag :act_name, @act_name %>
+<% end %>
+
+

@@ -1,0 +1,9 @@
+<h2><%= @page_title %></h2>
+
+<div class="doc"><%= @page_doc %></div>
+
+<%= render :partial => 'layouts/standard_form', :locals => {:controller => params[:controller], :action => "set"} %>
+
+<%= render :partial => 'layouts/standard_form', :locals => {:controller => params[:controller], :action => "update", :optgroup => "update_now", :multipart => true} %>
+
+

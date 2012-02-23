@@ -1,0 +1,26 @@
+<h3><%= GTEH_("views.activation.step3.title") %></h3>
+
+<div class="doc"><%= GTEH_("views.activation.step3.doc") %></div>
+
+<div class="step3_cert">
+  <% form_tag({:action=> 'step3_post'}, :multipart => true) do %>
+
+    <label for="cert_file_data"><%= GTEH_("views.activation.step3.upload_cert") %></label>
+    <input type="file" name="cert_file_data" style="width: 25em" />
+    <br /><br />
+    
+    <label for="cert_paste_data"><%= GTEH_("views.activation.step3.paste_cert") %></label>
+    <br />
+    <%= text_area_tag 'cert_paste_data', @signed_csr, {:cols => 60, :rows => 15 } %>
+    <br /></br />
+    
+    <input type="submit" name="cancel_activation" value='<%= GTEH_("views.activation.misc.cancel_activation") %>' />
+    <input type="submit" name="previous_step" value='<%= GTEH_("views.activation.misc.previous") %>' />
+    <%= submit_tag GT_("views.activation.misc.next") %>
+    <%= hidden_field_tag :act_name, @act_name %>
+  <% end %>
+</div>
+
+<% if @act_name != "main" %>
+<%= link_to "Back to dashboard", {:action => 'list', :controller => 'info'} %>
+<% end %>

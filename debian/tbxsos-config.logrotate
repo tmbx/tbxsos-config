@@ -1,0 +1,25 @@
+/var/log/teambox/tbxsos-config.log {
+# We rotate logs daily.
+  daily
+# Rotate files if they are bigger than 2 megabytes.
+  size 2M
+# Don't cry if this logfile is missing.
+  missingok
+# Keep 1 month worth of logs at a maximum.
+  maxage 31
+# Add the date after name of the log file.
+  dateext
+}
+
+/var/log/teambox/tbxsos-configd.log {
+# We rotate logs daily.
+  daily
+# Rotate files if they are bigger than 2 megabytes.
+  size 2M
+# Don't cry if this logfile is missing.
+  missingok
+# Keep 1 month worth of logs at a maximum.
+  maxage 31
+# Add the date after name of the log file.
+  dateext
+}

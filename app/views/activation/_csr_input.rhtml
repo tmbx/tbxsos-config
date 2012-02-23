@@ -1,0 +1,105 @@
+<div class="doc"><%= GTEH_("views.activation.step1.doc") %></div>  
+
+<fieldset>
+  <div class="step1_field">
+    <div class="step1_label">
+      <label for="act_country"><%= GTEH_("views.activation.step1.csr.country") %></label>
+    </div>
+    <div class="step1_value">
+      <select name="act_country">
+        <%
+          already_selected = false
+          country_list.each do |country|
+            sel_str = ''
+            if not already_selected and country["key"] == params[:act_country]
+              sel_str = ' selected'
+              already_selected = true
+            end
+        %>
+        <option value="<%= country["key"] %>"<%= sel_str %>><%= country["value"] %></option>
+        <%
+          end
+        %>
+      </select>
+    </div>
+  </div>
+
+  <div class="step1_field">
+    <div class="step1_label">
+      <label for="act_state"><%= GTEH_("views.activation.step1.csr.state") %></label>
+    </div>
+    <div class="step1_value">
+      <%= text_field_tag 'act_state', params[:act_state], :size => 45 %>
+    </div>
+  </div>
+
+  <div class="step1_field">
+    <div class="step1_label">
+      <label for="act_location"><%= GTEH_("views.activation.step1.csr.location") %></label>
+    </div>
+    <div class="step1_value">
+      <%= text_field_tag 'act_location', params[:act_location], :size => 45 %>
+    </div>
+  </div>
+
+  <div class="step1_field">
+    <div class="step1_label">
+      <label for="act_org"><%= GTEH_("views.activation.step1.csr.organization") %></label>
+    </div>
+    <div class="step1_value">
+      <%= text_field_tag 'act_org', params[:act_org], :size => 45 %>
+    </div>
+  </div>
+
+  <div class="step1_field">
+    <div class="step1_label">
+      <label for="act_org_unit"><%= GTEH_("views.activation.step1.csr.org_unit") %></label>
+    </div>
+    <div class="step1_value">
+      <%= text_field_tag 'act_org_unit', params[:act_org_unit], :size => 45 %>
+    </div>
+  </div>
+
+  <div class="step1_field">
+    <div class="step1_label">
+      <label for="act_domain"><%= GTEH_("views.activation.step1.csr.domain_name") %></label>
+    </div>
+    <div class="step1_value">
+      <%= text_field_tag 'act_domain', params[:act_domain], :size => 45 %>
+    </div>
+  </div>
+
+  <div class="step1_field">
+    <div class="step1_label">
+      <label for="act_email"><%= GTEH_("views.activation.step1.csr.email") %></labeL>
+    </div>
+    <div class="step1_value">
+      <%= text_field_tag 'act_email', params[:act_email], :size => 45 %>
+    </div>
+  </div>
+</fieldset>
+
+<h3><%= GTEH_("views.activation.step1.title.additional_info") %></h3>
+
+<div class="doc"><%= GTEH_("views.activation.step1.doc.contact_info") %></div>
+
+<fieldset>
+  <div class="step1_field">
+    <div class="step1_label">
+      <label for="act_admin_name"><%= GTEH_("views.activation.step1.csr.contact_name") %></label>
+    </div>
+    <div class="step1_value">
+      <%= text_field_tag 'act_admin_name', params[:act_admin_name], :size => 45 %>
+    </div>
+  </div>
+
+  <div class="step1_field">
+    <div class="step1_label">
+      <label for="act_admin_email"><%= GTEH_("views.activation.step1.csr.contact_email") %></label>
+    </div>
+    <div class="step1_value">
+      <%= text_field_tag 'act_admin_email', params[:act_admin_email], :size => 45 %>
+    </div>
+  </div>
+</fieldset>
+

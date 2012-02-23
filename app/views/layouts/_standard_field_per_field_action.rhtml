@@ -1,0 +1,128 @@
+<!-- DISPLAY FILTER FUNCTION -->
+<%
+  val = fi.value
+  if ! fi.displayfunc.nil?
+    val = fi.displayfunc.call(val)
+  end
+
+  # could add a field variable later
+  info_other_line = false
+  if fi.info.length > 10
+    info_other_line = true
+  end
+%>
+
+
+
+<!-- PRE FIELD SEPARATION -->
+<%
+  if ! fi.pre_sep.nil? && fi.pre_sep != ""
+%>
+<tr><td colspan="<%= @tablerows %>"><fieldset class="pre_sep"><legend><%= fi.pre_sep %></legend></fieldset></td></tr>
+<%
+  end
+%>
+
+
+
+
+<!-- PRE FIELD COMMENT -->
+<%
+  if ! fi.comment.nil? && fi.comment != ""
+%>
+<tr><td colspan="<%= @tablerows %>"><div class="form_doc"><%= fi.comment %></div></td></tr>
+<%
+  end
+%>
+
+
+<!-- FIELD BEGIN -->
+<tr>
+
+
+<!-- FIELD INFO -->
+<%
+  if info_other_line == true
+%>
+<td colspan="<%= @tablerows %>">
+<%
+  else
+%>
+<td>
+<%
+  end
+%>
+<div class="field_part">
+<div class="field_info_per_field_action">
+
+<!-- REQUIRED MARK -->
+<%
+  fieldrequired = ""
+  if fi.required
+    fieldrequired = "* "
+  end
+
+  if fi.errors.length > 0
+%>
+<span class="error">
+<label for="<%= fi.ident_tag %>"><%= fieldrequired + fi.info %></label>
+</span>
+<%
+  else
+%>
+<label for="<%= fi.ident_tag %>"><%= fieldrequired + fi.info %></label>
+<%
+  end
+%>
+</div>
+</div>
+</td>
+<%
+  if info_other_line == true
+%>
+</tr>
+<tr>
+<%
+  end
+%>
+<td width="1">
+<!-- FIELD INPUT -->
+<div class="field_part">
+<div class="field_input_per_field_action">
+<%= render :partial => 'layouts/standard_field_input', :locals => {:optgroup => optgroup, :fo => fo, :fi => fi, :val => val} %>
+</div>
+</div>
+</td>
+
+<!-- ACTION BUTTON -->
+<td style="text-align:right;">
+<div class="field_part">
+<div class="field_action_button">
+<%
+  disabled = ""
+  if fi.disabled
+    disabled = " disabled"
+  end
+%>
+<input type="submit" name="<%= fi.action %>" value="<%= fi.action_name %>" class="field_action_class" />
+</div>
+</div>
+</td>
+
+
+
+<!-- HELP ICON -->
+<%= render :partial => 'layouts/standard_field_help', :locals => {:fo => fo, :fi => fi} %>
+
+
+
+<!-- FIELD END -->
+</tr>
+
+
+
+
+<!-- ERROR MESSAGES -->
+<%= render :partial => 'layouts/standard_field_errors', :locals => {:fo => fo, :fi => fi} %>
+
+

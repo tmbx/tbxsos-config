@@ -1,0 +1,20 @@
+<td width="40">
+<div class="field_part">
+<div class="field_help">
+<%
+  if ! fi.help.nil? && fi.help.length > 0
+%>
+<a href="#" onclick="formHelpPopHelp(this,'dhelp_<%= fo.ident_str %>_<%= fi.ident_str %>'); return false;"><%= GTEH_("views.misc.whats_this") %></a>
+<div class="help_hidden" id="dhelp_<%= fo.ident_str %>_<%= fi.ident_str %>"><%= fi.help %></div>
+<%
+  else
+%>
+&nbsp;
+<%
+  end
+%>
+</div>
+</div>
+</td>
+
+

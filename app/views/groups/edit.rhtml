@@ -1,0 +1,22 @@
+<h2><%= @page_title %></h2>
+
+<%= render :partial => 'layouts/menu_pagetop', :locals => {:menu_id => "pagetop_ldap"} %>
+
+<%= render :partial => 'doc' %>
+
+<%= render :partial => 'org' %>
+
+<%= render :partial => 'layouts/standard_form', :locals => {:controller => "groups", :action => "update", :formtitle => GTEH_("views.groups.edit.formtitle.division")} %>
+
+
+<a name="edit_ldap_divisions" />
+
+<%= render :partial => 'layouts/standard_form', :locals => {:controller => "groups", :action => 'update_ldap_groups', :id => @profile, :anchor => "edit_ldap_divisions", :formtitle => GTEH_("views.groups.edit.formtitle.group_dn"), :optgroup => "ldap_group_dn"} %>
+
+
+
+
+
+
+<%= link_to GT_("views.groups.edit.link_to.back"), {:action => 'list', :org_id => @profile.org_id}, {:class => "back_link"} %>
+

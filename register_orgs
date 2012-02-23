@@ -1,0 +1,52 @@
+#!/bin/bash
+
+[ -z $(which kctl) ] && echo "kctl is missing." && exit 1
+[ -z "$1" ] && echo "Destination directory is missing." && exit 1
+
+ORGS=$(kctl lsorg | tail -n +2 | grep -Ev "pending_activation|2\s*$" | awk '{printf "org_id=%s org_name=%s\n", $1, $2 }')
+DEST=$1
+
+IFS=$'\n'
+for i in $ORGS; do
+    eval $i
+    echo "Fake-activating $org_name ($org_id)"
+    mkdir -p $DEST/activation/$org_name
+    cat > $DEST/activation/$org_name/act_data <<EOF
+---
+:id_name: $org_name
+:parent_id_name:
+:step: 7
+:keys_name: $org_name
+:name: $org_name
+:parent_keys_name:
+:org_id: $org_id
+EOF
+    mkdir -p $DEST/identity/$org_name
+    cat > $DEST/identity/$org_name/id_data <<EOF
+---
+:admin_name: "Dummy Admin"
+:admin_email: dummy@admin
+:org_id: $org_id
+:kdn: $org_name
+EOF
+
+    # We can't do squat about keys since there is nothing linking the
+    # organizations to the keys.
+    mkdir -p $DEST/keys
+
+    kctl setorgstatus $org_id 2
+done
+
+main_org=$(ls -1 $DEST/activation | head -1)
+
+if ! readlink -esq $DEST/identity/main; then
+    (cd $DEST/activation && ln -s $main_org main)
+fi
+
+if ! readlink -esq $DEST/identity/main; then
+    (cd $DEST/keys && ln -s $main_org main)
+fi
+
+if ! readlink -esq $DEST/identity/main; then
+    (cd $DEST/identity && ln -s $main_org main)    
+fi

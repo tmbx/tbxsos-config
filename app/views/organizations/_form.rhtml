@@ -1,0 +1,41 @@
+
+<!-- BEGIN FIELD "org" "name" -->
+<div class="form_field">
+
+<% if ! @ir.get_field_errors("org", "name").nil? %>
+  <% @ir.get_field_errors("org", "name").each do |line| %>
+  <div class="field_err_mess"><%= line %></div>
+  <% end %>
+<% end %>
+
+<div class="field_info">
+<label for=""org"_"name""><%= @ir.get_field_info("org", "name") %></label>
+</div>
+
+
+<div class="field_input">
+
+<% if @ir.field_required?("org", "name") %>
+<% if @ir.field_error_required?("org", "name") %>
+<span class="field_required_err">
+<% else %>
+<span class="field_required_ok">
+<% end %>
+*
+</span>
+<% end %>
+
+<%= text_field "org", "name" %>
+<% if @ir.field_autofocus?("org", "name") %>
+<%= javascript_tag "$('org_name').focus()" %>
+<% end %>
+</div>
+
+<div class="field_help">
+<%= @ir.get_field_help("org", "name") %>
+</div>
+
+<div>
+<!-- END FIELD "org" "name" -->
+
+

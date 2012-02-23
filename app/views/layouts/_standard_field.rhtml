@@ -1,0 +1,113 @@
+<!-- DISPLAY FILTER FUNCTION -->
+<%
+  val = fi.value
+  if ! fi.displayfunc.nil?
+    val = fi.displayfunc.call(val)
+  end
+%>
+
+
+
+<!-- PRE FIELD SEPARATION -->
+<%
+  if ! fi.pre_sep.nil? && fi.pre_sep != ""
+%>
+<tr><td colspan="<%= @tablerows %>"><fieldset class="pre_sep"><legend><%= fi.pre_sep %></legend></fieldset></td></tr>
+<%
+  end
+%>
+
+
+
+
+<!-- PRE FIELD COMMENT -->
+<%
+  if ! fi.comment.nil? && fi.comment != ""
+%>
+<tr><td colspan="<%= @tablerows %>"><div class="form_doc"><%= fi.comment %></div></td></tr>
+<%
+  end
+%>
+
+
+<!-- FIELD BEGIN -->
+<tr>
+
+
+<!-- FIELD INFO -->
+<%
+  if fi.type == "datetime"
+%>
+<%= render :partial => 'layouts/standard_field_datetime', :locals => {:fo => fo, :fi => fi, :val => val} %>
+<%
+  else
+%>
+<!-- FIELD INFO -->
+<td>
+<div class="field_part">
+<div class="field_info">
+
+<!-- REQUIRED MARK -->
+<%
+  fieldrequired = ""
+  if fi.required
+    fieldrequired = "* "
+  end
+
+  if fi.errors.length > 0
+%>
+<!--<span class="error">-->
+<label for="<%= fi.ident_tag %>"><%= fieldrequired + fi.info %></label>
+<!--</span>-->
+<%
+  else
+%>
+<label for="<%= fi.ident_tag %>"><%= fieldrequired + fi.info %></label>
+<%
+  end
+%>
+</div>
+</div>
+</td>
+
+<td width="1">
+<!-- FIELD INPUT OR SHOW -->
+<div class="field_part">
+<div class="field_input">
+<%
+  if fi.readonly
+%>
+<%= val.nil? ? "" : val.to_s %>
+<%
+  else
+%>
+<%= render :partial => 'layouts/standard_field_input', :locals => {:fo => fo, :optgroup => optgroup, :fi => fi, :val => val} %>
+<%
+  end
+%>
+</div>
+</div>
+</td>
+
+
+
+<%
+  end
+%>
+
+
+<% #HELP ICON %>
+<%= render :partial => 'layouts/standard_field_help', :locals => {:fo => fo, :fi => fi} %>
+
+
+
+<!-- FIELD END -->
+</tr>
+
+
+
+
+<% ### ERROR MESSAGES ### %>
+<%= render :partial => 'layouts/standard_field_errors', :locals => {:fo => fo, :fi => fi} %>
+
+

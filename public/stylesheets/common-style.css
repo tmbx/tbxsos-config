@@ -1,0 +1,68 @@
+body { font-family: Verdana, sans-serif; color: black; background: white; }
+
+.body { width: 650px; }
+
+table.layout { 
+               text-align: left;
+               vertical-align: top;
+               margin: 0;
+               padding: 0; 
+             }
+table.layout tr { text-align: left; vertical-align: top; margin: 0; padding: 0; }
+table.layout td { text-align: left; vertical-align: top; margin: 0; padding: 0; }
+
+#error_404 {
+ width: 600px;
+}
+
+.doc {
+      background-color: #D3D3D3;
+      /* background-color: lightgray; didn't work with some IE's */ 
+      font-size: small;
+      margin: 2.5em 0.5em 2em 0.5em;
+      padding: 1em 1em 1em 1em;
+      }
+
+.footer { 
+        font-size: small;
+        /*
+        position: fixed;
+        right: 1em;
+        bottom: 1em;
+        */
+        float: right;
+        padding-top: 2em;
+        padding-bottom: 1em;
+        padding-right: 1em;
+}
+
+#notice  { background: #2e2;
+           color: #222; }
+
+#warn { background: #ee0;
+        color: #222; }
+
+#error { background: #e22;
+         color: #fff; }
+
+.flash { padding: 10px;
+         text-align: center;
+         margin-top: 5px;
+         margin-bottom: 20px; }
+
+
+#menu_lang {
+  margin-top: 0.5em;
+  margin-right: 1em;
+  text-align: right;
+}
+
+#menu_lang .menu_item {
+  display: inline;
+  padding-left: 10px;
+}
+
+.other_action_link { text-align: right; margin: 1.3em 0.3em 1em 1em; }
+.back_link { text-align: right; display: block; margin-top: 3em; margin-left: 0}
+.redirector_link { text-align: right; display: block; margin-top: 25px; }
+

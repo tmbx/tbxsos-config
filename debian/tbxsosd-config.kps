@@ -1,0 +1,38 @@
+#!/bin/sh
+#
+# This script does database cleanup and SpamAssassin and clamav
+# updates if required.
+
+if [ "-v" == "$1" ]; then
+	OUT=/dev/stdout
+else
+	OUT=/dev/null
+fi
+
+# Cleanup the database.
+SQL="select event_clean(15)"
+su postgres -c "psql -d event_db -c '${SQL}'" > $OUT
+
+# Must check whether update is enabled or not.
+if (cd /etc/teambox && m4 /etc/teambox/tbxsosd.conf) | \
+    grep "server.nightly_updates" | tail -n 1 | \
+    grep -q "server.nightly_updates.*=.*\"1\""
+then
+    # Update SpamAssassin
+    if (sa-update 2>&1) > $OUT; then
+        # Compile the rules we just downloaded.
+        (sa-compile 2>&1) > $OUT;
+    fi;
+
+    # Update ClamAV
+    (/etc/init.d/clamav-freshclam no-daemon 2>&1) > $OUT
+
+    SOURCES=/tmp/kps.sources.list
+    UPDATE_URL=`(cd /etc/teambox && m4 tbxsosd.conf) | grep server.update_url | awk '{print $3}' | tr -d '";'`
+    UPDATE_DIST=`(cd /etc/teambox && m4 tbxsosd.conf) | grep server.update_dist | awk '{print $3}' | tr -d '";'`
+    echo "deb ${UPDATE_URL} ${UPDATE_DIST} main" > $SOURCES
+
+    # Look online for updates to packages.
+    (apt-get -y -o="Dir::Etc::SourceList=${SOURCES}" update 2>&1) > $OUT
+    (apt-get -y -o="Dir::Etc::SourceList=${SOURCES}" dist-upgrade 2>&1) > $OUT
+fi

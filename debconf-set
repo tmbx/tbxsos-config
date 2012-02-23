@@ -1,0 +1,18 @@
+#!/usr/bin/perl
+
+use Debconf::Client::ConfModule;
+use strict;
+
+if (scalar(@ARGV) < 1) {
+  die "Usage: debconf-set <key> <value>\n";
+} else {
+  my $key = $ARGV[0];
+  my $value = $ARGV[1];
+  my $status = Debconf::Client::ConfModule::set($key, $value);
+
+  if ($status ne 'value set') {
+    die "Could not set debconf key $key to $value (Status: $status)\n";
+  }
+}
+
+exit 0;

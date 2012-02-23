@@ -1,0 +1,102 @@
+<!-- ### FIELD INPUT ### -->
+<td colspan="2">
+<div class="field_part">
+<div class="field_input">
+
+<table class="form">
+<tr>
+<%
+  if fi.errors.length > 0
+%>
+<td style="text-align:right;"><div class="form_datetime_label"><span class="error"><%= GTEH_("views.layouts._standard_field_datetime.date") %></span></div></td>
+<%
+  else
+%>
+<td style="text-align:right;"><div class="form_datetime_label"><%= GTEH_("views.layouts._standard_field_datetime.date") %></div></td>
+<%
+  end
+%>
+<td>
+<table class="datetime">
+<tr>
+<td><div class="form_date_input"><input type="text" name="<%= fi.ident_tag %>[year]" value="<%= "%04d" % fi.value["year"] %>" size="4" maxlength="4" /></div></td>
+<td align="center">/</td>
+<td><div class="form_date_input"><input type="text" name="<%= fi.ident_tag %>[month]" value="<%= "%02d" % fi.value["month"] %>" size="2" maxlength="2" /></div></td>
+<td align="center">/</td>
+<td><div class="form_date_input"><input type="text" name="<%= fi.ident_tag %>[day]" value="<%= "%02d" % fi.value["day"] %>" size="2" maxlength="2" /></div></td>
+</tr>
+<tr>
+<td><div class="form_date_label"><%= GTEH_("views.layouts._standard_field_datetime.year") %></div></td>
+<td>&nbsp;</td>
+<td><div class="form_date_label"><%= GTEH_("views.layouts._standard_field_datetime.month") %></div></td>
+<td>&nbsp;</td>
+<td><div class="form_date_label"><%= GTEH_("views.layouts._standard_field_datetime.day") %></div></td>
+</tr>
+</table>
+</td>
+<%
+  if fi.errors.length > 0
+%>
+<td style="text-align:right;"><div class="form_datetime_label"><span class="error"><%= GTEH_("views.layouts._standard_field_datetime.time") %></span></div></td>
+<%
+  else
+%>
+<td style="text-align:right;"><div class="form_datetime_label"><%= GTEH_("views.layouts._standard_field_datetime.time") %></div></td>
+<%
+  end
+%>
+<td>
+<table class="datetime">
+<td><div class="form_time_input"><input type="text" name="<%= fi.ident_tag %>[hour]" value="<%= "%02d" % fi.value["hour"] %>" size="2" maxlength="2" /></div></td>
+<td align="center">:</td>
+<td><div class="form_time_input"><input type="text" name="<%= fi.ident_tag %>[min]" value="<%= "%02d" % fi.value["min"] %>" size="2" maxlength="2" /></div></td>
+<td align="center">:</td>
+<td><div class="form_time_input"><input type="text" name="<%= fi.ident_tag %>[sec]" value="<%= "%02d" % fi.value["sec"] %>" size="2" maxlength="2" /></div></td>
+</tr>
+<tr>
+<td><div class="form_time_label"><%= GTEH_("views.layouts._standard_field_datetime.hour") %></div></td>
+<td>&nbsp;</td>
+<td><div class="form_time_label"><%= GTEH_("views.layouts._standard_field_datetime.minute") %></div></td>
+<td>&nbsp;</td>
+<td><div class="form_time_label"><%= GTEH_("views.layouts._standard_field_datetime.second") %></div></td>
+</tr>
+
+<tr>
+<td>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td colspan="3">
+
+<table>
+  <tr>
+    <td>&nbsp;</td>
+    <td>Time zone:</td>
+    <td><select name="datetime[timezone]">
+        <% @timezones.each do |tz| %>
+          <!-- <%= fi.value["timezone"] %> -->
+          <% if fi.value["timezone"] == tz[1] %>
+        <option selected value="<%= tz[1] %>"><%= tz[0] %></option>
+          <% else %>
+            <option value="<%= tz[1] %>"><%= tz[0] %></option>
+          <% end %>
+        <% end  %>
+        </select>
+    </td>
+  </tr>
+</table>
+
+</td>
+</tr>
+
+</table>
+
+</div>
+</div>
+</td>
+
+

@@ -1,0 +1,29 @@
+<%= render :partial => 'head' %>
+
+<div class="output">
+
+<% if @pipe_results %>
+
+  <% @pipe_results.each do |p| %>
+    <div>
+      <span class="result_msg"><%= p.comment %> :</span>
+      <% if p.status == 0 then %>
+        <span class="result_msg color_success"><%= GTEH_("views.tests.test.succeeded") %></span>
+      <% else %>
+        <span class="result_msg color_failed"><%= GTEH_("views.tests.test.failed") %></span>
+      <% end %>
+      <span> <%= link_to GT_("errors.link_to.check_logs"), {:action => 'list', :controller => 'logs'} %></span>
+    </div>
+  <% end %>
+
+<% end %>
+
+
+
+</div>
+
+
+<%= link_to GT_("views.tests.test.link_to.back"), {:action => 'list'}, {:class => "back_link"} %>
+
+
+

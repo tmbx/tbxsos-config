@@ -1,0 +1,13 @@
+<h2><%= @page_title %></h2>
+
+<%= render :partial => 'layouts/menu_pagetop', :locals => {:menu_id => "pagetop_ldap"} %>
+
+<div class="doc"><%= @page_doc %></div>
+
+
+<%= render :partial => 'layouts/standard_form', :locals => {:controller => params[:controller], :action => "set"} %>
+
+<!--
+<%= link_to GT_("views.ldap_config.list.link_to.ldap_groups"), {:action => 'list', :controller => 'groups'}, { :class => "redirector_link" } %>
+-->
+

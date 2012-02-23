@@ -1,0 +1,19 @@
+<div class="form">
+<%
+  if (! fo.nil? && fo.required_notice == true)
+%>
+<div class="form_required_notice">* <%= GTEH_("forms.required_notice") %></div>
+<%
+  end
+%>
+<fieldset>
+<legend><%= formtitle %></legend>
+<%
+  if (! fo.nil? && fo.error == true)
+%>
+<div class="form_error"><%= GTEH_("framework.form.error.there_are_errors") %></div>
+<%
+  end
+%>
+<table class="form" border="0">
+

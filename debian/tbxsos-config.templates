@@ -1,0 +1,18 @@
+Template: tbxsos-config/web-passwd-title
+Type: text
+Description: Web configuration password
+
+Template: tbxsos-config/web-passwd
+Type: password
+Description: Web configuration password
+ Input the password you will use to connect to the web configuration interface.
+
+Template: tbxsos-config/web-passwd-again
+Type: password
+Description: Web configuration password, again
+ Input the password again to confirm.
+
+Template: tbxsos-config/web-passwd-error
+Type: error
+Description: Web configuration password error
+ Passwords don't match.  Please reenter your passwords.

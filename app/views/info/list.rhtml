@@ -1,0 +1,92 @@
+<h2><%= @page_title %></h2>
+
+<div class="doc"><%= @page_doc %></div>
+
+<fieldset>
+<legend><%= GTEH_("info.general_infos.descr") %></legend>
+  <table id="status">
+    <tr>
+      <td><%= GTEH_("views.info.list.tbxsos_version") %></td>
+      <td><%= begin
+                File.open("/etc/teambox/products/tbxsosd/product_version") { |f| f.read } 
+              rescue
+                'unknown'
+              end
+              %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= GTEH_("views.info.list.date") %></td>
+      <td> <%= t=Time.now(); t.strftime("%Y-%m-%d %H:%I:%S") %></td>
+    </tr>
+    <tr>
+      <td><%= GTEH_("forms.identities_options.server_kdn.info") %></td>
+      <td><%= c = ConfigOptions.new; c.get("server.kdn") %></td>
+    </tr>
+    <tr>
+      <td><%= GTEH_("views.info.list.act_status") %></td>
+      <td><%= GTEH_("views.info.list.activated") %></td>
+    </tr>
+    <tr>
+      <td><%= GTEH_("views.info.list.running_status") %></td>
+      <td>
+        <% if @tbxsosd_running %>
+        <%=  GTEH_("views.info.list.tbxsosd_running") %>
+        <% else %>
+        <%=  GTEH_("views.info.list.tbxsosd_not_running") %>
+        <% end %>
+      </td>
+    <tr>
+      <td><%= GTEH_("views.info.list.user_auth_method") %></td>
+      <td><%= @user_auth_method_str %></td>
+    </tr>
+    <%
+      if @ldap == false
+    %>
+    <tr>
+      <td><%= GTEH_("views.info.list.kps_database_user_count") %></td>
+      <td><%= @nb_users %></td>
+    </tr>
+    <%
+      end
+    %>
+    <%
+      if not @no_license.nil?
+    %>
+    <tr>
+      <td style="color: red;" colspan="2"><%= GTEH_("info.no_license") %></td>
+    </tr>
+    <%
+      else
+    %>
+    <tr>
+      <td><%= GTEH_("views.info.list.total_lic_seats") %></td>
+      <td><%= @lic_lim.to_s == "-1" ? GTEH_("views.info.list.unlimited") : @lic_lim.to_s %></td>
+    </tr>
+    <tr>
+      <td><%= GTEH_("views.info.list.used_lic_seats") %></td>
+      <td><%= @seats_current.length() %></td>
+    </tr>
+    <%
+      end
+    %>
+
+  </table>
+</fieldset>
+
+<fieldset>
+<legend><%= GTEH_("info.tools.descr") %></legend>
+<div class="form_doc"><%= GTEH_("views.info.list.doc.tools") %></div>
+<table id="status">
+	<tr>
+	  <td colspan="2"><%= link_to GT_("views.info.list.link_to.test_kps"), :controller => "tests", :action => "list" %></td>
+	</tr>
+    <tr>
+      <td colspan="2"><%= link_to GT_("info.stats.link"), url_for(:controller => "stats", :action => "list") %></td>
+    </tr>
+    <tr>
+      <td colspan="2"><%= link_to GT_("info.reboot.link"), url_for(:action => "reboot"), :confirm => GT_("misc.forms.are_you_sure") %></td>
+    </tr>
+</table>
+</fieldset>
+

@@ -1,0 +1,34 @@
+#activation {
+     width: 650px;
+     margin-left: 20%;
+     margin-top: 5%;
+     border: 1px black solid;
+     padding:0.5em;
+}
+
+.step1_field {
+    /*width: 50em;*/
+    margin: 2px 2px 2px 2px;
+}
+
+.step1_label {
+    width: 15em;
+    float: left;
+}
+
+.step1_value {
+    display: inline;
+    width: 2em;
+}
+
+.step2_csr {
+   font-size: 0.7em;
+   margin-left: 5em;
+   padding: 1em 1em 1em 1em;
+   width: 75%;
+}
+
+.right {
+    float: right;
+}
+

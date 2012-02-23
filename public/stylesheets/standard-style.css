@@ -1,0 +1,304 @@
+
+
+#menu_right {
+  float: right;
+  margin-right: 1em;
+  text-align: right;
+}
+
+#menu_right .menu_item {
+  display: inline;
+  padding-left: 10px;
+}
+
+#menu_dashboard {
+  margin-right: 20px;
+}
+
+#menu { width: 150px;
+        font-size: smaller;
+        float: left; }
+
+#menu_tools {
+  margin-top: 25px;
+}
+
+#menu_about {
+  margin-top: 25px;
+}
+
+#menu_pagetop {
+}
+
+#menu_pagetop .menu_item {
+  display: inline;
+  margin-right: 0.7em;
+}
+
+.link_disabled { color: grey; }
+.link_selected { text-decoration: none; font-weight: bold; }
+
+
+.option-table { width: 100%;
+                padding: 3px 3px 3px 3px;
+                border: 1px solid gray }
+
+.option-key { font-family: courier;
+              font-size: small;
+              width: 17em }
+              
+.option-comment { font-size: small;
+                  margin-left: 2em;
+                  margin-right: 2em; }
+
+.output { border: 1px gray solid;
+          margin: 2em 1em 2em 1em;
+          padding: 1em 1em 1em 1em;
+          overflow: hidden;
+          font-size: small; }
+
+.table_invisible { border: 0; }
+
+.td_submit { text-align: center; }
+
+.result_msg { font-size: small; }
+
+.color_failed { color: red; }
+
+.color_success { color: green; }
+
+#fill_bottom { line-height: 60px; }
+
+#status { }
+#status td { margin: 0; padding: 5px 20px 5px 20px; }
+
+#status .ok { color: green; }
+
+#status .fail { color: red; }
+
+
+/* FORMS */
+.error { color: #FF3333; }
+
+.error_revert { padding: 0.3em;
+         background: #e22;
+         color: #fff;
+         margin-bottom: 0.6em; }
+
+.form_doc {
+      background-color: #D3D3D3;
+       /* background-color: lightgray; didn't work with some IE's */
+       font-size: small;
+       margin: 1em 1em 1em 1em;
+       padding: 0.6em 0.6em 0.6em 0.6em; }
+table.form { width: 100%; }
+table.form, table.form tr, table.form td { margin: 0; padding: 0; }
+table.form td { vertical-align: top; }
+div.form { margin: 1em 0 0 0; padding: 0; }
+fieldset { padding: 1em 0em 1em 0em; margin: 0em 1em 1em 1em; }
+fieldset.pre_sep { width: 100%; padding: 1px; margin: 1em 0 0 0;
+                   border-left: 0px; border-right: 0px; border-bottom: 0px; }
+legend {
+  color: black; /* needed for IE - didn't feel the need to check why yet */
+  font-weight: bold;
+}
+.field_comment { margin: 1em 0 0 2em; padding: 0; font-size: 80%; color: #666666; }
+
+
+.form_error, .field_error { padding: 0.2em 1em 0.2em 1em; margin: 0 1em 1.7em 1em; font-size: small; background-color: #FF0000; color: white; }
+
+.field_error_message { padding: 0; margin: 0; }
+
+.field_part { margin: 0; padding: 0.5em 0em 0.5em 0em; }
+.field_info { margin: 0; padding: 0 0.5em 0 0.5em; text-align: right; }
+.field_info_per_field_action { margin: 0; padding: 0 0.5em 0 0.5em; }
+
+
+.field_input { margin: 0; padding: 0 0.5em 0 0.2em; }
+.field_input input, .field_input checkbox, .field_input textarea { margin: 0; padding: 0; }
+.field_input_per_field_action { margin: 0em 0em 0em 1em; padding: 0; }
+
+.field_help { margin: 0; padding: 0 0.5em 0 0.5em; font-size: small; }
+.field_required_ok { margin: 0; padding: 0.2em 0 0 1em; font-weight: bold; }
+.field_required_err { margin: 0; padding: 0.2em 0 0 1em; font-weight: bold; color: red; }
+.field_radio_button { margin: 0; padding: 0; }
+.field_radio_label { margin: 0; padding: 0; font-size: small; }
+
+.field_action_class { width: 6.5em; }
+
+.form_required_notice { margin-left: 0em; margin-bottom: 1.7em; font-size: small; }
+.form_datetime_label { margin-left: 2em; }
+.form_date_label, .form_time_label { text-align: left; margin: 0; padding: 0; font-size: x-small; }
+.form_date_input, .form_time_input { text-align: left; margin: 0 0.25em 0.25em 0.25em; padding: 0; }
+td .form_date_input, td .form_time_input { border: 0; margin: 0; }
+.form_reset { display: inline; margin: 0.5em 0.92em 0.5em 0.5em; padding: 0; }
+div.form_save { display: inline; margin: 0.5em 1.35em 0.5em 0em; padding: 0; }
+table td.form_save { text-align: right; padding-top: 0.4em; }
+
+input[type="submit"], input[type="reset"] { min-width: 5em; }
+
+/* custom */
+
+.input_group_dn_list { width: 30em; }
+.input_sec_email_list { width: 30em; }
+.input_group_dn_key_id { width: 30em; }
+.input_users_key_id { width: 20em; }
+
+
+
+
+
+
+
+table.list { width: 100%; padding-left: 0.3em; padding-right: 0.3em; }
+.list_line td { padding-left: 0.5em; padding-right: 0.5em; }
+
+
+.ldap_dn_label { margin-left: 0.25em; margin-top: 0.5em; }
+.ldap_dn_list, .ldap_dn_add { margin-left: 0.75em; margin-bottom: 0.5em; }
+
+
+#update_now {
+  margin: 0;
+  padding: 2em;
+}
+
+#helpbox_message {
+  overflow: auto;
+  /* height: 100px; */
+  margin: 0px;
+  padding: 3px;
+}
+
+#helpbox_close {
+  margin: 0px;
+  padding: 8px 3px 3px 3px;
+  text-align: right;
+  font-size: small;
+}
+
+#helpbox {
+  /* display: none; */   /* made visible in javascript after dynamic positioning - does not work???*/
+  visibility: hidden; /* couldn't unhide it with display:none - should read more about it */
+  position: absolute;
+  width: 400px;
+  margin: 0px;
+  padding: 3px;
+  background-color: #EEEEEE;
+  overflow: hidden;
+  border: 3px solid black;
+}
+
+.help_hidden {
+  display: none;
+}
+
+
+
+#master_license p {
+  font-size: x-small;
+}
+
+#master_license .Big_Title {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 23px;
+  font-weight: normal;
+  color: #020202;
+}
+#master_license .Mid_Title {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  color: #020202;
+}
+#master_license .Small_Title {
+  font-size: 14px;
+  font-weight: lighter;
+  color: #020202;
+}
+#master_license .Big_Title_gray {
+  font-size: 23px;
+  font-weight: lighter;
+  color: #010101;
+}
+#master_license .Big_Title_gray_full {
+  font-size: 23px;
+  font-weight: bold;
+  color: #010101;
+}
+#master_license .Mid_Title_gray {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  color: #010101;
+}
+#master_license .Small_Title_gray {
+  font-size: 14px;
+  font-weight: lighter;
+  color: #010101;
+}
+#master_license .Sub_Title {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #010101;
+}
+#master_license .Box_Title {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #ffffff;
+}
+#master_license .Box_Text {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #010101;
+}
+#master_license .Box_Text_Orange {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: normal;
+  color: #ac4e02;
+  text-align: left;
+}
+#master_license .Big_Text {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #010101;
+}
+#master_license .Text {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #010101;
+}
+#master_license .Text_Black {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #000000;
+}
+#master_license .Small_Text {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 9px;
+  font-weight:normal;
+  color: #010101;
+}
+#master_license .Very_Small_Text {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 7px;
+  font-weight:normal;
+  color: #010101;
+}
+
+.disabled {
+    background: #EEEEEE;
+    color: #333333;
+}
+
+.org_sep { margin: 1.2em 0 1.2em 0; }
+
+table td.col_title { text-align: center; font-weight: bold; }
+table td.text { text-align: left; }
+table td.number { text-align: right; padding-right: 0.6em; }
+table td.action_links { text-align: right; }

@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+          "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15" />
+    <title><%= GTEH_("views.misc.title") %></title>
+    <%= stylesheet_link_tag "common-style" %>
+    <%= stylesheet_link_tag "standard-style" %>
+	<%= stylesheet_link_tag "stats" %>
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag "forms_help.js" %>
+    <%= javascript_include_tag "forms.js" %>
+
+
+  </head>
+  <body>
+  <div id="wrapper">
+<table class="layout">
+<tr>
+<td>
+    <div id="menu">
+
+      <div id="menu_main">
+        <div class="menu_icon">
+          <a href="/info/list"><img style="border: none;" src="/imgs/teambox_ico_notrans.png" /></a>
+        </div>
+
+        <%= render :partial => 'layouts/standard_menu', :locals => {:menu_id => "left1"} %>
+      </div>
+
+
+      <div id="menu_tools">
+        <%= render :partial => 'layouts/standard_menu', :locals => {:menu_id => "left2"} %>
+      </div>
+
+
+      <div id="menu_about">
+        <%= render :partial => 'layouts/standard_menu', :locals => {:menu_id => "left3"} %> 
+      </div>
+
+    </div>
+</td>
+<td>
+    <div class="body">
+
+      <div id="menu_right">
+        <%= render :partial => 'layouts/standard_menu', :locals => {:menu_id => "topright"} %>
+      </div>
+
+      <div style="clear: right;"></div>
+
+      <% if !flash[:notice].nil? %>
+      <div class="flash" id="notice"><%= flash[:notice] %></div>
+      <% end %>
+      <% if !flash[:error].nil? %>
+      <div class="flash" id="error"><%= flash[:error] %></div>
+      <% end %>
+
+      <%= @content_for_layout %>
+
+      <div id="fill_bottom">&nbsp;</div>
+  
+        <div class="footer">
+          <%= GT_("views.misc.copyright") %>
+        </div>
+
+      </div>
+
+    </div>
+</td>
+</tr>
+</table>
+
+  </div> <!-- #wrapper -->
+
+  <div id="helpbox">
+    <div id="helpbox_message">
+    </div>
+    <div id="helpbox_close">
+      <a href="javascript:void" onClick="javascript:formHelpHideHelp();"><%= GTEH_("views.misc.close_help_window") %></a>
+    </div>
+  </div>
+
+  </body>
+</html>
